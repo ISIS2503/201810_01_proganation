@@ -1,0 +1,189 @@
+[
+    {
+        "id": "3210a1bb.5abbde",
+        "type": "serial in",
+        "z": "94d6342d.f2db68",
+        "name": "data",
+        "serial": "56d7b819.1e5c78",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "6f36d254.74f13c"
+            ]
+        ]
+    },
+    {
+        "id": "392e6f0d.71584",
+        "type": "inject",
+        "z": "94d6342d.f2db68",
+        "name": "Sensor time",
+        "topic": "actionTime",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "bdb3256f.a1c2f8",
+                "3e329995.b25e26"
+            ]
+        ]
+    },
+    {
+        "id": "bdb3256f.a1c2f8",
+        "type": "function",
+        "z": "94d6342d.f2db68",
+        "name": "Format Time",
+        "func": "var res = {};\n\n\nres.payload = new Date(msg.payload);\nres.topic = msg.topic;\n\nreturn res;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [
+                "a0d8cabe.ad99a8",
+                "86b4b2ce.394e2"
+            ]
+        ]
+    },
+    {
+        "id": "3e329995.b25e26",
+        "type": "debug",
+        "z": "94d6342d.f2db68",
+        "name": "before format",
+        "active": true,
+        "console": false,
+        "complete": "payload",
+        "x": 430,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a0d8cabe.ad99a8",
+        "type": "debug",
+        "z": "94d6342d.f2db68",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 660,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6f36d254.74f13c",
+        "type": "function",
+        "z": "94d6342d.f2db68",
+        "name": "Format alert",
+        "func": "var res = {};\nvar tempArray = [];\n\n\ntempString = msg.payload;\ntempString = tempString.replace(\"\\r\\n\", \"\");\nif (isNaN(tempString)==false ) {\n    res ={};\n    return res;\n}\n\nres.topic = \"alert\";\nres.payload = {};\n\nres.payload = {\"alert\": tempString, \"place\": \"Home\"}\n\nreturn res;\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 100,
+        "wires": [
+            [
+                "9f89b4ea.f1ad68",
+                "86b4b2ce.394e2"
+            ]
+        ]
+    },
+    {
+        "id": "86b4b2ce.394e2",
+        "type": "function",
+        "z": "94d6342d.f2db68",
+        "name": "Merge 2 messages",
+        "func": "context.data = context.data || {};\n\nswitch (msg.topic) \n{\n    case \"actionTime\":\n        context.data.sensetime = msg.payload;\n        msg = null;\n        break;\n    case \"alert\":\n        context.data.alert = msg.payload;\n        msg = null;\n        break;\n    default:\n        msg = null;\n    \tbreak;\n}\n\nif(context.data.sensetime != null && context.data.alert != null) \n{\n\t\tres = {};\n    res.payload = JSON.stringify(context.data);\n    res.topic = \"alert\";\n    context.data = null;\n   \n\n\t\treturn res;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [
+                "7701c496.c63c1c",
+                "75699118.a384a"
+            ]
+        ]
+    },
+    {
+        "id": "7701c496.c63c1c",
+        "type": "debug",
+        "z": "94d6342d.f2db68",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 850,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9f89b4ea.f1ad68",
+        "type": "debug",
+        "z": "94d6342d.f2db68",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 660,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "75699118.a384a",
+        "type": "mqtt out",
+        "z": "94d6342d.f2db68",
+        "name": "",
+        "topic": "lock/casa/puerta1",
+        "qos": "0",
+        "retain": "false",
+        "broker": "b2da4e61.bf3b2",
+        "x": 870,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "56d7b819.1e5c78",
+        "type": "serial-port",
+        "z": "",
+        "serialport": "COM3",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": false
+    },
+    {
+        "id": "b2da4e61.bf3b2",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "172.24.42.97",
+        "port": "8083",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": ""
+    }
+]
