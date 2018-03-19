@@ -3,9 +3,16 @@ Created on 3/03/2018
 
 @author: IVAN
 '''
+
 import paho.mqtt.client as mqttClient
 import time
- 
+import requests 
+
+
+mensaje =""
+base_url="172.24.42.60:8080"
+final_url="172.24.42.60:8080/floors"
+
 def on_connect(client, userdata, flags, rc):
  
     if rc == 0:
@@ -20,7 +27,18 @@ def on_connect(client, userdata, flags, rc):
         print("Connection failed")
  
 def on_message(client, userdata, message):
-    print ("Message received: "  + message.payload.decode())
+    mensaje =message.payload.decode()
+    print ("Message received: "  + mensaje)
+    
+    
+
+payload = mensaje
+response = requests.post(final_url, data=payload)
+
+
+
+print(response.text) #TEXT/HTML
+print(response.status_code, response.reason) #HTTP
  
 Connected = False   #global variable for the state of the connection
  
