@@ -1,17 +1,17 @@
 '''
 Created on 3/03/2018
-
 @author: IVAN
 '''
 
 import paho.mqtt.client as mqttClient
 import time
 import requests 
+import json
 
 
 mensaje =""
-base_url="172.24.42.60:8080"
-final_url="172.24.42.60:8080/floors"
+base_url="172.24.42.97:8080"
+final_url="http://172.24.42.97:8080/mail/newmail"
 
 def on_connect(client, userdata, flags, rc):
  
@@ -27,18 +27,12 @@ def on_connect(client, userdata, flags, rc):
         print("Connection failed")
  
 def on_message(client, userdata, message):
-    mensaje =message.payload.decode()
-    print ("Message received: "  + mensaje)
-    
-    
-
-payload = mensaje
-response = requests.post(final_url, data=payload)
-
-
-
-print(response.text) #TEXT/HTML
-print(response.status_code, response.reason) #HTTP
+    payload =message.payload.decode()
+    print ("Message received: "  + payload)
+    obj = json.loads(payload) 
+    response = requests.post(final_url,json=obj)
+    print(response.text) #TEXT/HTML
+    print(response.status_code, response.reason) #HTTP
  
 Connected = False   #global variable for the state of the connection
  
