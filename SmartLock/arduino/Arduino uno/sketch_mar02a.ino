@@ -1,5 +1,24 @@
 #include <Keypad.h>
 #include <TimerOne.h>
+
+// comunicación arduino/ESP8622
+#define SIZE_BUFFER_DATA       50
+boolean     stringComplete = false;
+String      inputString = "";
+char        bufferData [SIZE_BUFFER_DATA];
+//Minimum voltage required for an alert
+const double MIN_VOLTAGE = 1.2;
+
+//Battery indicator
+const int BATTERY_LED = A1;
+
+//Battery measure pin
+const int BATTERY_PIN = A3;
+
+//Current battery charge
+double batteryCharge;
+
+
 //Specified password
 const String KEY = "1234";
 const String KEY2 = "4321";
@@ -88,6 +107,15 @@ long currTime;
 
  
 void setup() {
+
+  // Iniciamos el monitor serie
+  Serial.begin(9600);
+
+  // Ouput pin definition for BATTERY_LED
+  pinMode(BATTERY_LED,OUTPUT);
+
+  //Input pin definition for battery measure
+  pinMode(BATTERY_PIN,INPUT);
   
   pinMode(ledPin, OUTPUT);      // declare LED as output
   pinMode(inputPin, INPUT);     // declare sensor as input
@@ -100,7 +128,7 @@ void setup() {
   pinMode(B_LED_PIN, OUTPUT);
   pinMode(CONTACT_PIN,INPUT);
   
-  setColor(0, 0, 255);
+  setColor(0, 255, 0);
 
   currentKey = "";
   open = false;
@@ -109,9 +137,33 @@ void setup() {
  Serial.begin(9600);
   
 }
- 
 void loop(){
-  val = digitalRead(inputPin);  // read input value
+  motion();
+  contact();
+  checkBattery();
+  password();
+  receiveData();
+}
+
+
+void receiveData() {
+  while (Serial.available()) {
+    // get the new byte:
+    char inChar = (char)Serial.read();
+    // add it to the inputString:
+    inputString += inChar;
+    // if the incoming character is a newline, set a flag
+    // so the main loop can do something about it:
+    if (inChar == '\n') {
+      inputString.toCharArray(bufferData, SIZE_BUFFER_DATA);
+      stringComplete = true;
+      Serial.println(inputString);
+    }
+  }
+}
+
+ void motion(){
+   val = digitalRead(inputPin);  // read input value
   if (val == HIGH) {            // check if the input is HIGH
     digitalWrite(ledPin, HIGH);  // turn LED ON
     if (pirState == LOW) {
@@ -129,12 +181,15 @@ void loop(){
       pirState = LOW;
     }
   }
+ }
+
+ void contact(){
   //Button input read and processing 
   if(!buttonState) {
     if(digitalRead(CONTACT_PIN)) {
       currTime = millis();
       buttonState = true;
-      setColor(0, 255, 0); 
+      setColor(0, 0, 255); 
       open = true;
       attempts = 0;
       Serial.println("Door opened!!");
@@ -148,7 +203,7 @@ void loop(){
          delay(3000);
       }
     }else{
-      setColor(0, 0, 255);
+      setColor(0, 255, 0);
       open = false;
       buttonState = false;
       Serial.println("Door closed!!");
@@ -156,8 +211,26 @@ void loop(){
   }
   
   delay(100);
+ }
 
-   char customKey;
+ void checkBattery(){
+  
+  //Value conversion from digital to voltage
+  batteryCharge = (analogRead(BATTERY_PIN)*5.4)/1024;
+ 
+  
+  //Measured value comparison with min voltage required
+  if(batteryCharge<=MIN_VOLTAGE) {
+    digitalWrite(BATTERY_LED,HIGH);
+    //Serial.println("LOW BATTERY");
+  }
+  else {
+    digitalWrite(BATTERY_LED,LOW);
+  }
+ }
+
+ void password(){
+  char customKey;
 
   if(!block) {
     //Selected key parsed;
@@ -169,7 +242,7 @@ void loop(){
     delay(10000);
     attempts=0;
     block=false;
-    setColor(0, 0, 255);
+    setColor(0, 255, 0);
     
   }
 
@@ -183,7 +256,7 @@ void loop(){
   if(open && currentKey.endsWith("*")) {
     open = false;
     Serial.println("Door closed");
-    setColor(0, 0, 255);
+    setColor(0, 255, 0);
     currentKey = "";
   }
   //If the current key contains '#' reset attempt
@@ -197,12 +270,40 @@ void loop(){
     if(currentKey == KEY||currentKey == KEY2||currentKey == KEY3) {
 
       
-      setColor(0, 255, 0); 
+      setColor(0, 0, 255); 
+      
       open = true;
       Serial.println("Door opened!!");
       attempts = 0;
-     
-      
+      currTime = millis();
+      if(open=true) {
+        
+        while(open=true){
+      if((millis()-currTime)>=10000) {
+        setColor(255, 0, 0);
+        Serial.println("Door opened too much time!!");
+         delay(3000);
+        
+    customKey = customKeypad.getKey();
+
+  
+  //Verification of input and appended value
+  if (customKey) {  
+    currentKey+=String(customKey);
+    Serial.println(currentKey);
+  }
+
+  //If the current key contains '*' and door is open
+  if(open && currentKey.endsWith("*")) {
+    open = false;
+    Serial.println("Door closed");
+    setColor(0, 255, 0);
+    currentKey = "";
+    break;
+  }
+      }
+      }
+      }
     }
     else {
       setColor(255, 0, 0); 
@@ -210,7 +311,7 @@ void loop(){
       attempts++;
       currentKey = "";
       Serial.println("Number of attempts: "+String(attempts));
-       setColor(0, 0, 255); 
+       setColor(0, 255, 0); 
     }
   }else if(currentKey.length()> KEY.length()){
     Serial.println("Door opened!!");
@@ -220,7 +321,8 @@ void loop(){
   }
 
   delay(100);
-}
+  
+ }
 
 
 
@@ -231,7 +333,4 @@ void setColor(int redValue, int greenValue, int blueValue) {
   analogWrite(B_LED_PIN, blueValue);
 }
 
-void PuertaAbierta()
-   {   setColor(255, 0, 0);
-      Serial.println("Door left open!!");
-   }
+
