@@ -4,7 +4,7 @@
 //DEFINES
 #define TOPIC_SUBSCRIBE        "lock/casa/puerta1"
 #define  TOPIC_PUBLISH          "lock/casa/puerta2"
-#define SIZE_BUFFER_DATA       50
+#define SIZE_BUFFER_DATA       150
 
 //VARIABLES
 const char* idDevice = "ISIS2503";
@@ -18,11 +18,12 @@ WiFiClient    clientWIFI;
 PubSubClient  clientMQTT(clientWIFI);
 
 // CONFIG WIFI
-const char* ssid = "FAMILIAZALAZAR";
-const char* password = "79276289";
+const char* ssid = "SAJADU*";
+const char* password = "44337754";
 
 // CONFIG MQTT
-IPAddress serverMQTT (192,168,0,16);
+//casa 192,168,0,16
+IPAddress serverMQTT (192,168,0,17);
 const uint16_t portMQTT = 1883;
 // const char* usernameMQTT = "admin";
 // const char* passwordMQTT = "admin";
@@ -49,8 +50,8 @@ while (WiFi.status() != WL_CONNECTED) {
 
 
 void callback(char* topic, byte* payload, unsigned int length) {
- 
- 
+
+
   Serial.print("Message arrived in topic: ");
   Serial.println(topic);
   Serial.println();
@@ -107,12 +108,14 @@ void connectMQTT(){
 void processData() {
 
     if (stringComplete && clientMQTT.connected()) {
+      
       if(clientMQTT.publish(TOPIC_PUBLISH, bufferData)) {
         inputString = "";
         stringComplete = false;
       }
       init_flag = false;
     }
+    
     clientMQTT.loop();
 }
 

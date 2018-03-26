@@ -1,8 +1,15 @@
 #include <Keypad.h>
 #include <TimerOne.h>
+#include <string.h>
 
+
+//
+String id ="1";
+String recidencia ="1";
+String apto="701";
+String alarma="";
 // comunicación arduino/ESP8622
-#define SIZE_BUFFER_DATA       50
+#define SIZE_BUFFER_DATA       150
 boolean     stringComplete = false;
 String      inputString = "";
 char        bufferData [SIZE_BUFFER_DATA];
@@ -23,6 +30,20 @@ double batteryCharge;
 const String KEY = "1234";
 const String KEY2 = "4321";
 const String KEY3 ="1243";
+// MAILS
+String remitente ="lock@yale-services.com";
+String correo1="abc@gmail.com";
+String correo2="def@yahoo.com";
+String correo3="ghi@hotmail.com";
+//COntatenar mensaje
+String coma = ",";
+//alertas
+String movimiento = "movimiento";
+String fallo ="exceso de intentos de clave";
+String bateria ="bateria baja";
+String puertaTiempo = "Puerta abierta demasiado tiempo";
+String puertaAbierta ="puerta abierta";
+
 
 //Keypad rows
 const byte ROWS = 4; 
@@ -157,7 +178,7 @@ void receiveData() {
     if (inChar == '\n') {
       inputString.toCharArray(bufferData, SIZE_BUFFER_DATA);
       stringComplete = true;
-      Serial.println(inputString);
+      //Serial.println(inputString);
     }
   }
 }
@@ -169,6 +190,8 @@ void receiveData() {
     if (pirState == LOW) {
       // we have just turned on
       Serial.println("Motion detected!");
+    
+   //Serial.println(recidencia+coma+apto+coma+id+coma+movimiento+coma+remitente+coma+correo1+coma+correo2);
       // We only want to print on the output change, not state
       pirState = HIGH;
     }
@@ -176,7 +199,7 @@ void receiveData() {
     digitalWrite(ledPin, LOW); // turn LED OFF
     if (pirState == HIGH){
       // we have just turned of
-      Serial.println("Motion ended!");
+      //Serial.println("Motion ended!"+"mm");
       // We only want to print on the output change, not state
       pirState = LOW;
     }
@@ -192,21 +215,21 @@ void receiveData() {
       setColor(0, 0, 255); 
       open = true;
       attempts = 0;
-      Serial.println("Door opened!!");
+        
     }
   }
   else {
     if(digitalRead(CONTACT_PIN)) {
       if((millis()-currTime)>=30000) {
         setColor(255, 0, 0);
-        Serial.println("Door opened too much time!!");
+        Serial.println(recidencia+coma+apto+coma+id+coma+puertaTiempo+coma+remitente+coma+correo1+coma+correo2);
+        
          delay(3000);
       }
     }else{
       setColor(0, 255, 0);
       open = false;
       buttonState = false;
-      Serial.println("Door closed!!");
     }
   }
   
@@ -223,6 +246,7 @@ void receiveData() {
   if(batteryCharge<=MIN_VOLTAGE) {
     digitalWrite(BATTERY_LED,HIGH);
     //Serial.println("LOW BATTERY");
+    //Serial.println(recidencia+coma+apto+coma+id+coma+bateria+coma+remitente+coma+correo1+coma+correo2);
   }
   else {
     digitalWrite(BATTERY_LED,LOW);
@@ -237,7 +261,7 @@ void receiveData() {
     customKey = customKeypad.getKey();
   }
   else {
-    Serial.println("Number of attempts exceeded");
+    Serial.println(recidencia+coma+apto+coma+id+coma+fallo+coma+remitente+coma+correo1+coma+correo2);
     setColor(255, 0, 0);
     delay(10000);
     attempts=0;
@@ -255,14 +279,14 @@ void receiveData() {
   //If the current key contains '*' and door is open
   if(open && currentKey.endsWith("*")) {
     open = false;
-    Serial.println("Door closed");
+   // Serial.println("Door closed");
     setColor(0, 255, 0);
     currentKey = "";
   }
   //If the current key contains '#' reset attempt
   if(currentKey.endsWith("#")&&currentKey.length()<=KEY.length()) {
     currentKey = "";
-    Serial.println("Attempt deleted");
+   // Serial.println("Attempt deleted");
   }
 
   //If current key matches the key length
@@ -273,7 +297,7 @@ void receiveData() {
       setColor(0, 0, 255); 
       
       open = true;
-      Serial.println("Door opened!!");
+      //Serial.println("Door opened!!");
       attempts = 0;
       currTime = millis();
       if(open=true) {
@@ -281,7 +305,8 @@ void receiveData() {
         while(open=true){
       if((millis()-currTime)>=10000) {
         setColor(255, 0, 0);
-        Serial.println("Door opened too much time!!");
+       // Serial.println("door open too much time");
+        Serial.println(recidencia+coma+apto+coma+id+coma+puertaTiempo+coma+remitente+coma+correo1+coma+correo2);
          delay(3000);
         
     customKey = customKeypad.getKey();
@@ -296,7 +321,7 @@ void receiveData() {
   //If the current key contains '*' and door is open
   if(open && currentKey.endsWith("*")) {
     open = false;
-    Serial.println("Door closed");
+    //Serial.println("Door closed");
     setColor(0, 255, 0);
     currentKey = "";
     break;
@@ -310,11 +335,11 @@ void receiveData() {
       delay(1000);
       attempts++;
       currentKey = "";
-      Serial.println("Number of attempts: "+String(attempts));
+     // Serial.println("Number of attempts: "+String(attempts));
        setColor(0, 255, 0); 
     }
   }else if(currentKey.length()> KEY.length()){
-    Serial.println("Door opened!!");
+   // Serial.println("Door opened!!");
   }
   if(attempts>=maxAttempts) {
     block = true;
