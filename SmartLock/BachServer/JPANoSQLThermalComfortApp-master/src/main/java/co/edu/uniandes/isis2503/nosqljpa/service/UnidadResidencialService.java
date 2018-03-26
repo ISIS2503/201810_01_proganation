@@ -170,6 +170,12 @@ private final unidadRecidencialLogic logica;
         return logica.desabilitar(id);
     }
     
+   @DELETE
+   @Path("{id}/Inmueble/{id2}")
+   public InmuebleDTO desactibarInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2)
+    {
+        return logica.desabilitarInmueble(id,id2);
+    }
     
     
 }

@@ -158,6 +158,34 @@ public class unidadRecidencialLogic {
                   return null;
               }
           }
+          
+          public InmuebleDTO desabilitarInmueble(Long id,Long id2)
+          {
+              boolean encontro = false;
+              unidadRecidencialEntity result = persistance.find(id);
+              if(result!=null)
+              {
+                  InmuebleEntity in=new InmuebleEntity();
+                  ArrayList<InmuebleEntity> al = (ArrayList<InmuebleEntity>) result.getCasas();
+                  for(int i =0;i<al.size()&& !encontro;i++)
+                  {
+                      in = al.get(i);
+                      if(in.getId()==id2)
+                      {
+                          in.setActivo(Boolean.FALSE);
+                          al.set(i,in );
+                          encontro = true;
+                      }
+                  }
+                  result.setCasas(al);
+                  persistance.update(result);
+                  return in.entityToDTO(in);
+              }
+              else
+              {
+                  return null;
+              }
+          }
           /**
            * metoddo que retorna todas als arlertas
            * @param id

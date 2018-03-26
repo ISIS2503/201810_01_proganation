@@ -25,6 +25,10 @@ package co.edu.uniandes.isis2503.nosqljpa.service;
 
 import co.edu.uniandes.isis2503.nosqljpa.logic.unidadRecidencialLogic;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -48,7 +52,7 @@ public void connect() {
     try {
        
         System.out.println("holaaaa");
-        client = new MqttClient("tcp://192.168.0.17:1883", "Sending");
+        client = new MqttClient("tcp://172.24.42.64:1883", "Sending");
         System.out.println("hola");
         client.connect();
         client.setCallback(this);
@@ -75,10 +79,22 @@ public void messageArrived(String topic, MqttMessage message)
     
   
     String mensaje=message.toString();
+    String[] lista = mensaje.split(",");
+     
+    HttpClient client = HttpClients.createDefault();
+    HttpPost post = new HttpPost("http://172.24.42.60:8091/UnidadResidencial/"+Long.parseLong(lista[0])+"/Inmueble/"+Long.parseLong(lista[1]));
+    String json ="{\"id\": \" "+ Long.parseLong(lista[2])+ "\",\"idlock\": \"322\",\"tipoDeAlarma\": \""+ Long.parseLong(lista[3]) +"\"}";
+    StringEntity enitity = new StringEntity(json);
+    post.setEntity(enitity);
+    post.setHeader("Accept","application/json");
+     post.setHeader("Content-type","application/json");
+	 client.execute(post);
+
+    
 //    
 //    String sincorchete = mensaje.replace("[", "");
 //    sincorchete = sincorchete.replace("]", "");
-//    String[] lista = sincorchete.split(",");
+ 
 //    AlertasDTO alerta = new AlertasDTO();
 //   // alerta.setId(Long.MIN_VALUE);
 //    //logica.addAlerta(lista[0], , dto)
