@@ -81,6 +81,11 @@ private final unidadRecidencialLogic logica;
     public unidadRecidencialDTO find(@PathParam("id") Long id) {
         return logica.find(id);
     }
+    @GET
+   @Path("{id}/Inmueble")
+   public List<InmuebleDTO> allInmueble(@PathParam("id") Long id) {
+      return logica.allIn(id);
+   }
    /**
     * metodo que busca un inmueble especifico en una unidad url http://172.24.42.60:8080/UnidadResidencial/1/Inmueble/1
     * @param id
@@ -112,7 +117,7 @@ private final unidadRecidencialLogic logica;
     * @param id3
     * @return 
     */
-     @GET
+    @GET
    @Path("{id}/Inmueble/{id2}/Alertas/{id3}")
    public AlertasDTO findAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3) {
           return logica.findAlertas(id, id2, id3);

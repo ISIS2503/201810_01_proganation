@@ -310,7 +310,7 @@ public class unidadRecidencialLogic {
                   for(int i =0;i<list.size()&& !buscar;i++)
                   {
                       
-                      if(list.get(i).getId() == id2)
+                      if(list.get(i).getId() == id2 && list.get(i).getActivo())
                       {
                            entity = list.get(i);
                            buscar = true;
@@ -339,5 +339,23 @@ public class unidadRecidencialLogic {
                    
           }
           
-       
+       public List<InmuebleDTO> allIn(Long id)
+       {
+             unidadRecidencialEntity result = persistance.find(id);
+             if(result != null)
+             {
+                 List<InmuebleEntity> al = result.getCasas();
+                 List<InmuebleDTO> ar = new ArrayList<>();
+                 for(int i=0;i<al.size();i++)
+                 {
+                     InmuebleEntity en = al.get(i);
+                     ar.add(en.entityToDTO(en));
+                 }
+                 return ar;
+             }
+             else
+             {
+                 return null;
+             }
+       }
 }
