@@ -24,7 +24,8 @@
 package co.edu.uniandes.isis2503.nosqljpa.service;
 
 
-
+import co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthorizationFilter.Role;
+import co.edu.uniandes.isis2503.nosqljpa.authentificacion.Secured;
 import co.edu.uniandes.isis2503.nosqljpa.logic.unidadRecidencialLogic;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.InmuebleDTO;
@@ -47,6 +48,7 @@ import javax.ws.rs.core.MediaType;
  * @author js.palacios437
  */
 @Path("/UnidadResidencial")
+@Secured({Role.admin})
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UnidadResidencialService {
@@ -65,6 +67,7 @@ private final unidadRecidencialLogic logica;
      * @return lsita con las unidades recidenciales
      */
    @GET
+   @Secured({Role.admin})
    public List<unidadRecidencialDTO> all() {
      List<unidadRecidencialEntity> lo = logica.all();
       System.out.println(lo +"12412412");

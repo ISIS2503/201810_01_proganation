@@ -38,11 +38,33 @@ THE SOFTWARE.
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>co.edu.uniandes.isis2503.nosqljpa.service</param-value>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>co.edu.uniandes.isis2503.nosqljpa.service;co.edu.uniandes.isis2503.nosqljpa.authentificacion</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
             <param-value>true</param-value>
         </init-param>
+        
+          
+        <servlet-name>CORS Filter</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.container.ContainerResponseFilter</param-name>
+            <param-value>co.edu.uniandes.isis2503.nosqljpa.authentificacion.CORSFilter</param-value>
+        </init-param>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>
+            <param-value>co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthenticationFilter</param-value>
+        </init-param>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>
+            <param-value>co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthorizationFilter</param-value>
+        </init-param>
+  
+        
     </servlet>
 
     <servlet-mapping>

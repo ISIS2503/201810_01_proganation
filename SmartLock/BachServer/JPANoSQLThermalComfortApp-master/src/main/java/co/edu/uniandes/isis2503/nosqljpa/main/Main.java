@@ -40,7 +40,7 @@ public class Main {
         try {
           System.out.println("pre con");
             
-             new Conection().connect();
+            // new Conection().connect();
              System.out.println("pos con");
             String webappDirLocation = "src/main/webapp/";
             String webPort = System.getenv("PORT");
