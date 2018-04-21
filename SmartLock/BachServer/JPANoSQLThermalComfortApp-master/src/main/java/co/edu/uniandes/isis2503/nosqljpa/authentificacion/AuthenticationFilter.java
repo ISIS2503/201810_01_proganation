@@ -61,7 +61,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     public static final String AUTHENTICATION_SCHEME = "Bearer";
 
-    final JwkProvider provider = new UrlJwkProvider("https://isis2503-jspalacios437.auth0.com/.well-known/jwks.json");
+    final JwkProvider provider = new UrlJwkProvider("https://isis2503-jsramos14.auth0.com/.well-known/jwks.json");
     final String privateKeyId = "PK";
     RSAKeyProvider keyProvider = new RSAKeyProvider() {
         @Override
@@ -110,7 +110,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             }
             //ID token
             else {
-                audience = "eywF50M6yrQGWkFukr0eIifJ5AvbPpWP";
+                audience = "mG04cXdxM0EdhpSN3uH9L_iXcOko8isy";
             }
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer(issuer)
