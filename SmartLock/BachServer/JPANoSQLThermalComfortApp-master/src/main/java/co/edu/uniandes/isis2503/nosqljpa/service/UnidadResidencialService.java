@@ -48,7 +48,7 @@ import javax.ws.rs.core.MediaType;
  * @author js.palacios437
  */
 @Path("/UnidadResidencial")
-@Secured({Role.admin})
+@Secured
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UnidadResidencialService {
@@ -67,7 +67,7 @@ private final unidadRecidencialLogic logica;
      * @return lsita con las unidades recidenciales
      */
    @GET
-   @Secured({Role.admin})
+   @Secured({Role.Yale})
    public List<unidadRecidencialDTO> all() {
      List<unidadRecidencialEntity> lo = logica.all();
       System.out.println(lo +"12412412");
@@ -80,11 +80,13 @@ private final unidadRecidencialLogic logica;
      * @return la unidad
      */
     @GET
+    @Secured({Role.Secure})
     @Path("/{id}")
     public unidadRecidencialDTO find(@PathParam("id") Long id) {
         return logica.find(id);
     }
     @GET
+    @Secured({Role.admin})
    @Path("{id}/Inmueble")
    public List<InmuebleDTO> allInmueble(@PathParam("id") Long id) {
       return logica.allIn(id);
@@ -96,6 +98,7 @@ private final unidadRecidencialLogic logica;
     * @return 
     */
    @GET
+   @Secured({Role.user})
    @Path("{id}/Inmueble/{id2}")
    public InmuebleDTO findInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2) {
       return logica.findIn(id,id2);
@@ -107,6 +110,7 @@ private final unidadRecidencialLogic logica;
     * @return 
     */
    @GET
+   @Secured({Role.user})
    @Path("{id}/Inmueble/{id2}/Alertas")
    public List<AlertasDTO> allAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2) {
      List<AlertasDTO> lista = logica.allAlertas(id, id2);
@@ -172,6 +176,7 @@ private final unidadRecidencialLogic logica;
      * @return  la unidad 
      */
     @DELETE
+    @Secured({Role.Yale})
     @Path("/{id}")
     public unidadRecidencialDTO desactivar(@PathParam("id") Long id)
     {
