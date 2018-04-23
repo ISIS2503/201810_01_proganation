@@ -3,8 +3,8 @@
 
 //DEFINES
 #define TOPIC_SUBSCRIBE        "lock/casa/puerta1"
-#define  TOPIC_PUBLISH          "lock/casa/puerta2"
-#define SIZE_BUFFER_DATA       150
+#define  TOPIC_PUBLISH          "lock/casa/puerta3"
+#define SIZE_BUFFER_DATA       150                  
 
 //VARIABLES
 const char* idDevice = "ISIS2503";
@@ -18,12 +18,16 @@ WiFiClient    clientWIFI;
 PubSubClient  clientMQTT(clientWIFI);
 
 // CONFIG WIFI
-const char* ssid = "SAJADU*";
-const char* password = "44337754";
+//const char* ssid = "ISIS2503";
+//const char* password = "Yale2018";
+const char* ssid = "FAMILIAZALAZAR";
+const char* password = "79276289";
 
 // CONFIG MQTT
 //casa 192,168,0,16
-IPAddress serverMQTT (192,168,0,17);
+//172.24.42.97 MV
+IPAddress serverMQTT (192,168,0,16);
+//default 1883
 const uint16_t portMQTT = 1883;
 // const char* usernameMQTT = "admin";
 // const char* passwordMQTT = "admin";
@@ -101,17 +105,18 @@ void connectMQTT(){
  
      }
     }
-    clientMQTT.subscribe("lock/casa/puerta3");
+    clientMQTT.subscribe(TOPIC_SUBSCRIBE);
     Serial.println("Subscribe OK");
   }
   }
 void processData() {
 
     if (stringComplete && clientMQTT.connected()) {
-      
-      if(clientMQTT.publish(TOPIC_PUBLISH, bufferData)) {
+       
+      if(clientMQTT.publish(TOPIC_SUBSCRIBE, bufferData)) {
         inputString = "";
         stringComplete = false;
+         Serial.println("mensaje enviado");
       }
       init_flag = false;
     }
@@ -120,6 +125,7 @@ void processData() {
 }
 
 void receiveData() {
+ 
   while (Serial.available()) {
     // get the new byte:
     char inChar = (char)Serial.read();
@@ -130,6 +136,7 @@ void receiveData() {
     if (inChar == '\n') {
       inputString.toCharArray(bufferData, SIZE_BUFFER_DATA);
       stringComplete = true;
+      
     }
   }
 }

@@ -1,3 +1,4 @@
+#include <ArduinoJson.h>
 #include <Keypad.h>
 #include <TimerOne.h>
 #include <string.h>
@@ -29,7 +30,9 @@ double batteryCharge;
 //Specified password
 const String KEY = "1234";
 const String KEY2 = "4321";
-const String KEY3 ="1243";
+const String KEY3 = "4312";
+String KEYS[20];
+
 // MAILS
 String remitente ="lock@yale-services.com";
 String correo1="abc@gmail.com";
@@ -128,7 +131,7 @@ long currTime;
 
  
 void setup() {
-
+KEYS[4]="1234";
   // Iniciamos el monitor serie
   Serial.begin(9600);
 
@@ -166,22 +169,68 @@ void loop(){
   receiveData();
 }
 
+//Method that outputs the RGB specified color
+void setColor(int redValue, int greenValue, int blueValue) {
+  analogWrite(R_LED_PIN, redValue);
+  analogWrite(G_LED_PIN, greenValue);
+  analogWrite(B_LED_PIN, blueValue);
+}
 
 void receiveData() {
-  while (Serial.available()) {
+  boolean terminado=false;
+  while (Serial.available()&&terminado==false) {
     // get the new byte:
-    char inChar = (char)Serial.read();
+    //char inChar = (char)Serial.read();
+  
     // add it to the inputString:
-    inputString += inChar;
+   // inputString += inChar;
     // if the incoming character is a newline, set a flag
     // so the main loop can do something about it:
-    if (inChar == '\n') {
-      inputString.toCharArray(bufferData, SIZE_BUFFER_DATA);
-      stringComplete = true;
-      //Serial.println(inputString);
+  //  if (inChar == '\n') {
+   //   inputString.toCharArray(bufferData, SIZE_BUFFER_DATA);
+      
+      
+    //  Serial.println(inputString);
+   // char json[] = "{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
+
+StaticJsonBuffer<200> jsonBuffer;
+  JsonObject& msg = jsonBuffer.parse(Serial);    
+// cc = change password/create password da =delete all , d1= delete 1
+ String accion = msg["accion"];
+ String clave = msg["clave"];
+ int numero = msg["numero"];
+if(accion.equals("cp")){
+ 
+
+         KEYS[numero]=clave;
+          Serial.println("password changed/created");
+        terminado=true;
+     }
+     if(accion.equals("d1")){
+  
+
+         KEYS[numero]="";;
+          Serial.println("password deleted");
+        terminado=true;
+     }
+     if(accion.equals("da")){
+  Serial.println(KEYS[4]);
+      for(int i=0;i<20;i++){
+        KEYS[i]="";
+        
+        
+      }
+      Serial.println(KEYS[4]);
+      Serial.println("all passwords deleted");
+      terminado=true;
+     
+     }
+     if(terminado==true){
+      break; 
+     }
     }
   }
-}
+//}
 
  void motion(){
    val = digitalRead(inputPin);  // read input value
@@ -215,7 +264,8 @@ void receiveData() {
       setColor(0, 0, 255); 
       open = true;
       attempts = 0;
-        
+      
+        Serial.println("abierto");
     }
   }
   else {
@@ -291,9 +341,9 @@ void receiveData() {
 
   //If current key matches the key length
   if (currentKey.length()== KEY.length()) {
-    if(currentKey == KEY||currentKey == KEY2||currentKey == KEY3) {
-
-      
+    for(int i=0;i<=20;i++){
+      if(currentKey==KEYS[i]&&i<20){
+        
       setColor(0, 0, 255); 
       
       open = true;
@@ -329,33 +379,33 @@ void receiveData() {
       }
       }
       }
-    }
-    else {
+       
+        Serial.println("sirvio el array");
+        Serial.println(i);
+        break;
+      }
+      if (i==20) {
       setColor(255, 0, 0); 
       delay(1000);
       attempts++;
       currentKey = "";
-     // Serial.println("Number of attempts: "+String(attempts));
+      Serial.println("Number of attempts: "+String(attempts));
        setColor(0, 255, 0); 
     }
-  }else if(currentKey.length()> KEY.length()){
-   // Serial.println("Door opened!!");
-  }
-  if(attempts>=maxAttempts) {
+    if(attempts>=maxAttempts) {
     block = true;
   }
+    }
+   
+    
 
   delay(100);
   
  }
+ }
 
 
 
-//Method that outputs the RGB specified color
-void setColor(int redValue, int greenValue, int blueValue) {
-  analogWrite(R_LED_PIN, redValue);
-  analogWrite(G_LED_PIN, greenValue);
-  analogWrite(B_LED_PIN, blueValue);
-}
+
 
 
