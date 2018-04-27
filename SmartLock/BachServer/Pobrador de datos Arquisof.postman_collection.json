@@ -1,0 +1,300 @@
+{
+	"id": "dd5274d2-80b4-5c9c-7213-07282f6df254",
+	"name": "Pobrador de datos Arquisof",
+	"description": "",
+	"order": [
+		"5cd0e87a-ac47-42aa-520f-dedd04abb7c0",
+		"6a8303aa-aaca-a8a0-f78d-0ac76037657b",
+		"c0470f58-f023-cac4-b0a9-81ca7ca8fab4",
+		"7ba3b6fc-0fc3-bf14-0dd2-6c3fdefaa8c5",
+		"87dddb2a-a108-3ace-92ab-e82659d989cb",
+		"74fc5877-fa2b-7c93-c7bc-56fe9ff6cbc7",
+		"ebc2e519-8e74-ef3d-bd1f-2f2189c9fea2",
+		"fbc72574-177b-f7b9-457e-86851d2ed13f"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1524840545922,
+	"owner": "2582047",
+	"public": false,
+	"requests": [
+		{
+			"id": "5cd0e87a-ac47-42aa-520f-dedd04abb7c0",
+			"headers": "Content-Type: application/json\ntoken: \n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://172.24.42.60:8080/UnidadResidencial/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "dd5274d2-80b4-5c9c-7213-07282f6df254",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://172.24.42.60:8080/UnidadResidencial/",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1524840568935,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"id\":\"1\"\n}"
+		},
+		{
+			"id": "6a8303aa-aaca-a8a0-f78d-0ac76037657b",
+			"headers": "Content-Type: application/json\ntoken: \n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://172.24.42.60:8080/UnidadResidencial/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "dd5274d2-80b4-5c9c-7213-07282f6df254",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://172.24.42.60:8080/UnidadResidencial/ copy",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1524840568935,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"isFromCollection": true,
+			"collectionRequestId": "5cd0e87a-ac47-42aa-520f-dedd04abb7c0",
+			"rawModeData": "{\n\t\"id\":\"1\"\n}"
+		},
+		{
+			"id": "74fc5877-fa2b-7c93-c7bc-56fe9ff6cbc7",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://172.24.42.60:8080/UnidadResidencial/100/Inmueble",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "dd5274d2-80b4-5c9c-7213-07282f6df254",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://172.24.42.60:8080/UnidadResidencial/100/Inmueble",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1524840704993,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\n\"id\":\"2\"\n\n}\n"
+		},
+		{
+			"id": "7ba3b6fc-0fc3-bf14-0dd2-6c3fdefaa8c5",
+			"headers": "Content-Type: application/json\ntoken: \n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://172.24.42.60:8080/UnidadResidencial/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "dd5274d2-80b4-5c9c-7213-07282f6df254",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://172.24.42.60:8080/UnidadResidencial/ copy",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1524840568935,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"isFromCollection": true,
+			"collectionRequestId": "5cd0e87a-ac47-42aa-520f-dedd04abb7c0",
+			"rawModeData": "{\n\t\"id\":\"1\"\n}"
+		},
+		{
+			"id": "87dddb2a-a108-3ace-92ab-e82659d989cb",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://172.24.42.60:8080/UnidadResidencial/100/Inmueble",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "dd5274d2-80b4-5c9c-7213-07282f6df254",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://172.24.42.60:8080/UnidadResidencial/100/Inmueble",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1524840666572,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\n\"id\":\"1\"\n\n}\n"
+		},
+		{
+			"id": "c0470f58-f023-cac4-b0a9-81ca7ca8fab4",
+			"headers": "Content-Type: application/json\ntoken: \n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://172.24.42.60:8080/UnidadResidencial/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "dd5274d2-80b4-5c9c-7213-07282f6df254",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://172.24.42.60:8080/UnidadResidencial/ copy",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1524840568935,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"isFromCollection": true,
+			"collectionRequestId": "5cd0e87a-ac47-42aa-520f-dedd04abb7c0",
+			"rawModeData": "{\n\t\"id\":\"1\"\n}"
+		},
+		{
+			"id": "ebc2e519-8e74-ef3d-bd1f-2f2189c9fea2",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://172.24.42.60:8080/UnidadResidencial/100/Inmueble",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "dd5274d2-80b4-5c9c-7213-07282f6df254",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://172.24.42.60:8080/UnidadResidencial/100/Inmueble",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1524840739178,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\n\"id\":\"3\"\n\n}\n"
+		},
+		{
+			"id": "fbc72574-177b-f7b9-457e-86851d2ed13f",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://172.24.42.60:8080/UnidadResidencial/100/Inmueble",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "dd5274d2-80b4-5c9c-7213-07282f6df254",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://172.24.42.60:8080/UnidadResidencial/100/Inmueble",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1524840748906,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\n\"id\":\"3\"\n\n}\n"
+		}
+	]
+}
