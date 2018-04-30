@@ -48,7 +48,8 @@ import javax.ws.rs.core.MediaType;
  * @author js.palacios437
  */
 @Path("/UnidadResidencial")
-@Secured
+//@Secured
+ @Secured({Role.user})
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UnidadResidencialService {
