@@ -102,7 +102,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     void verifyToken(String token) {
         try {//Cambiar por variables de entorno
-            String issuer = "https://isis2503-jspalacios437.auth0.com";
+            String issuer = "https://isis2503-jsramos14.auth0.com";
             String audience;
             //Access token
             if (!JWT.decode(token).getClaim("gty").isNull() && JWT.decode(token).getClaim("gty").asString().equals("client-credentials")) {

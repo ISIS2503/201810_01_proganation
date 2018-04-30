@@ -1,0 +1,1113 @@
+{
+	"id": "2bf03261-5832-6d86-4415-d37388f098d4",
+	"name": "Auth0 Authentication API",
+	"description": "The Authentication API exposes all of the identity functionality of Auth0 as well as all of the supported identity protocols such as OpenID Connect, OAuth, and SAML. Generally speaking you will consume this API through one of our SDKs like Auth0.js or libraries such as the Lock widget. However, if you are building all of your authentication UI manually you will likely interact with this API directly.",
+	"order": [],
+	"folders": [
+		{
+			"owner": "2881698",
+			"lastUpdatedBy": "312984",
+			"lastRevision": 169904979,
+			"id": "563b6208-27df-66cb-f610-e9dea0f78ba1",
+			"name": "Authenticate",
+			"description": "",
+			"order": [
+				"eb96358d-57cf-e424-29c9-2f24d0c9a2ec"
+			],
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"folders_order": []
+		},
+		{
+			"owner": "2881698",
+			"lastUpdatedBy": "312984",
+			"lastRevision": 169905800,
+			"id": "8799b9d7-a10f-ac47-9482-205426c9d10e",
+			"name": "DB Connections",
+			"description": "",
+			"order": [
+				"f5003c09-40b8-b7a3-a19c-d06e815cc434",
+				"d6c200ed-d271-8576-2345-aa963dfa49e3",
+				"0e4d256f-38ec-1ded-9ccf-26542a49ea33"
+			],
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"folders_order": []
+		},
+		{
+			"owner": "2881698",
+			"lastUpdatedBy": "312984",
+			"lastRevision": 169921224,
+			"id": "1e16c5b4-0acd-aad1-7a36-3e3be1e82617",
+			"name": "Delegated Authentication",
+			"description": "",
+			"order": [
+				"63413411-95e3-2d67-c0af-6492ed6c4ef7",
+				"f7bf0a0c-1a3d-207b-6b10-bd609efd8b7a"
+			],
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"folders_order": []
+		},
+		{
+			"owner": "2881698",
+			"lastUpdatedBy": "312984",
+			"lastRevision": 957238620,
+			"id": "9a1128e7-8876-a640-303a-60ed1f143277",
+			"name": "Get Access Token",
+			"description": "",
+			"order": [
+				"4943e6f0-9cf7-6364-2da1-41799bd10f84",
+				"fe3f21d1-a477-00aa-a606-a76745a15e44",
+				"6dbc57e4-05e9-f3ac-66d6-62d0e3986f7c",
+				"22344c20-0ae5-f4ba-9d6d-f06591a86912",
+				"9e70fb6f-21f6-9a24-bffc-0dbb8e8b40c1"
+			],
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"folders_order": []
+		},
+		{
+			"owner": "2881698",
+			"lastUpdatedBy": "312984",
+			"lastRevision": 169923802,
+			"id": "d991d0b6-2eba-5dc6-9ac4-59addfa5adbc",
+			"name": "Link Accounts",
+			"description": "",
+			"order": [
+				"f276d062-dcf6-10e4-a645-78e2f83e472c"
+			],
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"folders_order": []
+		},
+		{
+			"owner": "2881698",
+			"lastUpdatedBy": "312984",
+			"lastRevision": 169905889,
+			"id": "06315773-cf9a-4a60-39d9-94b88881167a",
+			"name": "Passwordless",
+			"description": "",
+			"order": [
+				"65d0e68c-3a1c-fe32-0e76-4e3ec202298d",
+				"219d609a-0c4c-8a49-c1f2-4c6f92bf84a7",
+				"a59822d7-2c5c-4150-cd86-2fabbe97117a"
+			],
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"folders_order": []
+		},
+		{
+			"owner": "2881698",
+			"lastUpdatedBy": "312984",
+			"lastRevision": 169908553,
+			"id": "6f8e708a-bcd9-c471-1c03-97dfb1dcebb8",
+			"name": "SAML",
+			"description": "",
+			"order": [
+				"92ca46f9-2522-0f0e-7994-f57e462904ef",
+				"852e2fac-0956-18d9-0acd-cf89dbd886f0"
+			],
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"folders_order": []
+		},
+		{
+			"owner": "2881698",
+			"lastUpdatedBy": "312984",
+			"lastRevision": 169918277,
+			"id": "048be6a5-2540-a98c-1db4-8c11d449cac3",
+			"name": "User Profile",
+			"description": "",
+			"order": [
+				"fbc2cf36-82a6-6da2-a6b4-b0495b5cc706",
+				"7db169f2-64b7-b818-6f08-78bc1c18bcc9"
+			],
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"folders_order": []
+		},
+		{
+			"owner": "2881698",
+			"lastUpdatedBy": "312984",
+			"lastRevision": 169913332,
+			"id": "8af4ca03-884a-0f78-2d63-861a086d4462",
+			"name": "WS-Fed",
+			"description": "The WS-Fed protocol is used for Microsoft applications (e.g.: Office365, Dynamics CRM, etc.). All the parameters of the SAML assertion can be modified through rules.",
+			"order": [
+				"2449ee95-d0c4-8506-666a-cce73016ee5f",
+				"4a6230ad-a974-b9c7-4ce5-e70115a13a1a"
+			],
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"folders_order": []
+		}
+	],
+	"timestamp": 0,
+	"owner": "2881698",
+	"public": false,
+	"folders_order": [],
+	"hasRequests": true,
+	"requests": [
+		{
+			"id": "0e4d256f-38ec-1ded-9ccf-26542a49ea33",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/dbconnections/change_password",
+			"folder": "8799b9d7-a10f-ac47-9482-205426c9d10e",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "connection",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525107969770,
+			"name": "Ask to change a password for a given user",
+			"description": "Given the user email address and the connection specified, Auth0 will send a change password email.\n\n* If password was provided, once the user clicks on the confirm password change link, the new password specified in this POST will be set to this user.\n* If password was NOT provided, once the user clicks on the password change link they will be redirected to a page asking them for a new password.\n\nThis endpoint only works for database connections.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "219d609a-0c4c-8a49-c1f2-4c6f92bf84a7",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/passwordless/start",
+			"folder": "06315773-cf9a-4a60-39d9-94b88881167a",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "connection",
+					"value": "sms",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "phone_number",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108095507,
+			"name": "Start Passwordless flow sending an SMS message",
+			"description": "Given the user phone_number, it will send a SMS message with a verification code. You can then authenticate with this user using the /oauth/ro endpoint specifying phone_number as username and code as password:",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "22344c20-0ae5-f4ba-9d6d-f06591a86912",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/oauth/token",
+			"folder": "9a1128e7-8876-a640-303a-60ed1f143277",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "password",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "audience",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108052261,
+			"name": "Resource Owner Password",
+			"description": "This is the OAuth 2.0 grant that highly trusted apps utilize in order to access an API. In this flow the end-user is asked to fill in credentials (username/password) typically using an interactive form. This information is later on sent to the Client and the Authorization Server. It is therefore imperative that the Client is absolutely trusted with this information.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "2449ee95-d0c4-8506-666a-cce73016ee5f",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/wsfed/:client_id",
+			"folder": "8af4ca03-884a-0f78-2d63-861a086d4462",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {
+				"client_id": ""
+			},
+			"pathVariableData": [
+				{
+					"description": "",
+					"key": "client_id",
+					"value": ""
+				}
+			],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108213525,
+			"name": "Accepts a WS-Fed request to initiate a login",
+			"description": "The client id parameter is optional. You can use wtrealm as well.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "4943e6f0-9cf7-6364-2da1-41799bd10f84",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/oauth/token",
+			"folder": "9a1128e7-8876-a640-303a-60ed1f143277",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "authorization_code",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_secret",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108020511,
+			"name": "Authorization Code",
+			"description": "This is the OAuth 2.0 grant that regular web apps utilize in order to access an API. Use this endpoint to exchange an Authorization Code for an Access Token.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "4a6230ad-a974-b9c7-4ce5-e70115a13a1a",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/wsfed/FederationMetadata/2007-06/FederationMetadata.xml",
+			"folder": "8af4ca03-884a-0f78-2d63-861a086d4462",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108235383,
+			"name": "Returns the WS-Federation Metadata",
+			"description": "",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "63413411-95e3-2d67-c0af-6492ed6c4ef7",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/delegation",
+			"folder": "1e16c5b4-0acd-aad1-7a36-3e3be1e82617",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "grant_type",
+					"value": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id_token",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "target",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "api_type",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525107980953,
+			"name": "Obtain a delegation token (from an id_token)",
+			"description": "Given an existing token, this endpoint will generate a new token signed with the target client secret. This is used to flow the identity of the user from the application to an API or across different APIs that are protected with different secrets.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "65d0e68c-3a1c-fe32-0e76-4e3ec202298d",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/passwordless/start",
+			"folder": "06315773-cf9a-4a60-39d9-94b88881167a",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "connection",
+					"value": "email",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "send",
+					"value": "link",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108083389,
+			"name": "Start Passwordless flow sending an email",
+			"description": "Given the user email address, it will send an email with:\n\n* A link (default, send:\"link\"). You can then authenticate with this user opening the link and he will be automatically logged in to the application. Optionally, you can append/override parameters to the link (like scope, redirect_uri, protocol, response_type, etc.) using authParams object.\n* A verification code (send:\"code\"). You can then authenticate with this user using the /oauth/ro endpoint specifying email as username and code as password.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "6dbc57e4-05e9-f3ac-66d6-62d0e3986f7c",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/oauth/token",
+			"folder": "9a1128e7-8876-a640-303a-60ed1f143277",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "client_credentials",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_secret",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "audience",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108042192,
+			"name": "Client Credentials",
+			"description": "This is the OAuth 2.0 grant that server processes utilize in order to access an API. Use this endpoint to directly request an `access_token` by using the Client Credentials (a Client Id and a Client Secret).",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "7db169f2-64b7-b818-6f08-78bc1c18bcc9",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/tokeninfo",
+			"folder": "048be6a5-2540-a98c-1db4-8c11d449cac3",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "id_token",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108165211,
+			"name": "Return a user profile based on the user's JWT",
+			"description": "Validates a JSON Web Token (signature and expiration) and returns the user information associated with the user id (sub property) of the token.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "852e2fac-0956-18d9-0acd-cf89dbd886f0",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/samlp/metadata/:client_id",
+			"folder": "6f8e708a-bcd9-c471-1c03-97dfb1dcebb8",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {
+				"client_id": ""
+			},
+			"pathVariableData": [
+				{
+					"description": "",
+					"key": "client_id",
+					"value": ""
+				}
+			],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108142304,
+			"name": "Returns the SAML 2.0 metadata",
+			"description": "",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "92ca46f9-2522-0f0e-7994-f57e462904ef",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/samlp/:client_id?connection=",
+			"folder": "6f8e708a-bcd9-c471-1c03-97dfb1dcebb8",
+			"queryParams": [
+				{
+					"key": "connection",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": "",
+			"pathVariables": {
+				"client_id": ""
+			},
+			"pathVariableData": [
+				{
+					"description": "",
+					"key": "client_id",
+					"value": ""
+				}
+			],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108134160,
+			"name": "Accepts a SAML request to initiate a login",
+			"description": "Optionally, accepts a connection parameter to login with a specific provider. If no connection is specified, the Auth0 Login Page will be shown.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "9e70fb6f-21f6-9a24-bffc-0dbb8e8b40c1",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://isis2503-jsramos14.auth0.com/oauth/token",
+			"folder": "9a1128e7-8876-a640-303a-60ed1f143277",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "authorization_code",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code_verifier",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108060678,
+			"name": "Refresh Token",
+			"description": "Use this endpoint to refresh an access token, using the refresh token you got during authorization.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "a59822d7-2c5c-4150-cd86-2fabbe97117a",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/oauth/ro",
+			"folder": "06315773-cf9a-4a60-39d9-94b88881167a",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "connection",
+					"value": "sms",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "grant_type",
+					"value": "password",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "openid",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108124896,
+			"name": "Login using a phone number and verification code",
+			"description": "Given the user credentials and the connection specified, it will do the authentication on the provider and return a JSON with the access_token and id_token. This endpoint only works for database connections, passwordless connections, Active Directory/LDAP, Windows Azure AD and ADFS.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "d6c200ed-d271-8576-2345-aa963dfa49e3",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://isis2503-jsramos14.auth0.com/dbconnections/signup",
+			"folder": "8799b9d7-a10f-ac47-9482-205426c9d10e",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": "mG04cXdxM0EdhpSN3uH9L_iXcOko8isy",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "Yale2@yale.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "Clave12345",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "connection",
+					"value": "Username-Password-Authentication",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108237950,
+			"name": "Signup using a username/password",
+			"description": "Given the user credentials, the connection specified and the Auth0 account information, it will create a new user. You can then authenticate with this user using the /oauth/ro endpoint. This endpoint only works for database connections.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "eb96358d-57cf-e424-29c9-2f24d0c9a2ec",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/oauth/access_token",
+			"folder": "563b6208-27df-66cb-f610-e9dea0f78ba1",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "access_token",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "connection",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "openid",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525107941235,
+			"name": "Login using a social provider's access token",
+			"description": "Given the social provider's access_token and the connection specified, it will do the authentication on the provider and return a JSON with the access_token and id_token. Currently, this endpoint only works for Facebook, Google, Twitter and Weibo.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "f276d062-dcf6-10e4-a645-78e2f83e472c",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/unlink",
+			"folder": "d991d0b6-2eba-5dc6-9ac4-59addfa5adbc",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "access_token",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user_id",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108071219,
+			"name": "Unlink an account",
+			"description": "",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "f5003c09-40b8-b7a3-a19c-d06e815cc434",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/oauth/ro",
+			"folder": "8799b9d7-a10f-ac47-9482-205426c9d10e",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id_token",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "connection",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "grant_type",
+					"value": "password",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "openid",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "device",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525107955749,
+			"name": "[Deprecated] Login using username and password",
+			"description": "Given the user credentials and the connection specified, it will do the authentication on the provider and return a JSON with the access_token and id_token. This endpoint only works for database connections, passwordless connections, Active Directory/LDAP, Windows Azure AD and ADFS.\n\n**This endpoint is being deprecated.** Please use the [Resource Owner Password flow](https://auth0.com/docs/api/authentication#resource-owner-password) instead.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "f7bf0a0c-1a3d-207b-6b10-bd609efd8b7a",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/delegation",
+			"folder": "1e16c5b4-0acd-aad1-7a36-3e3be1e82617",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "grant_type",
+					"value": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "refresh_token",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "target",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "api_type",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525107990985,
+			"name": "Obtain a delegation token (from a refresh_token)",
+			"description": "Given an existing token, this endpoint will generate a new token signed with the target client secret. This is used to flow the identity of the user from the application to an API or across different APIs that are protected with different secrets.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "fbc2cf36-82a6-6da2-a6b4-b0495b5cc706",
+			"headers": "Authorization: Bearer YOUR_TOKEN_HERE\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer YOUR_TOKEN_HERE",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://isis2503-jsramos14.auth0.com/userinfo",
+			"folder": "048be6a5-2540-a98c-1db4-8c11d449cac3",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108151915,
+			"name": "Returns a user profile based on the Auth0 access token",
+			"description": "Returns the user information based on the Auth0 access token (obtained during login).",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		},
+		{
+			"id": "fe3f21d1-a477-00aa-a606-a76745a15e44",
+			"headers": "",
+			"headerData": [],
+			"url": "https://isis2503-jsramos14.auth0.com/oauth/token",
+			"folder": "9a1128e7-8876-a640-303a-60ed1f143277",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "authorization_code",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code_verifier",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1525108030324,
+			"name": "Authorization Code (PKCE)",
+			"description": "This is the OAuth 2.0 grant that mobile apps utilize in order to access an API. Use this endpoint to exchange an Authorization Code for an Access Token.",
+			"collectionId": "2bf03261-5832-6d86-4415-d37388f098d4",
+			"responses": []
+		}
+	]
+}
