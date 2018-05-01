@@ -24,6 +24,7 @@
 package co.edu.uniandes.isis2503.nosqljpa.model.dto.model;
 
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
+import java.util.Date;
 
 /**
  *
@@ -31,13 +32,22 @@ import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
  */
 public class AlertasDTO {
     
-       private Long id;
+     private Long id;
     
     private String idlock;
     
     private String tipoDeAlarma;
 
-    
+     private String timeStamp;
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+     
     public AlertasDTO()
     {
         
@@ -47,6 +57,7 @@ public class AlertasDTO {
         this.id = entity.getId();
         this.idlock = entity.getIdlock();
         this.tipoDeAlarma = entity.getTipoDeAlarma();
+        this.timeStamp = entity.getTimeStamp();
     }
     
     public AlertasEntity toEntity(AlertasDTO dto)

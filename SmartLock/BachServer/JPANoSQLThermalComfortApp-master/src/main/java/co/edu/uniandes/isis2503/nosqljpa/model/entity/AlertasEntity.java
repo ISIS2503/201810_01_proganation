@@ -25,6 +25,7 @@ package co.edu.uniandes.isis2503.nosqljpa.model.entity;
 
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,6 +48,8 @@ public class AlertasEntity implements Serializable {
     private String idlock;
     
     private String tipoDeAlarma;
+    
+    private String timeStamp;
       
       @ManyToOne(cascade = CascadeType.PERSIST)
       private InmuebleEntity Inmueble;
@@ -61,6 +64,7 @@ public class AlertasEntity implements Serializable {
           this.id = dto.getId();
           this.idlock = dto.getIdlock();
           this.tipoDeAlarma = dto.getTipoDeAlarma();
+          this.timeStamp = dto.getTimeStamp();
       }
       /**
        * convierte un dto a entity
@@ -107,6 +111,14 @@ public class AlertasEntity implements Serializable {
 
     public void setInmueble(InmuebleEntity Inmueble) {
         this.Inmueble = Inmueble;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
     
 }

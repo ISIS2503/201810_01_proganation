@@ -30,7 +30,10 @@ import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity;
 import co.edu.uniandes.isis2503.nosqljpa.persistence.unidadRecidencialPersistance;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -321,7 +324,11 @@ public class unidadRecidencialLogic {
                   if(entity != null)
                   {
                       ArrayList<AlertasEntity> ar = (ArrayList<AlertasEntity>) entity.getAlertas();
-                      
+                          DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
+                           Date dateobj = new Date(); 
+                         String ss =  df.format(dateobj);
+                            System.out.println(df.format(dateobj));
+                            dto.setTimeStamp(ss);
                       ar.add(dto.toEntity(dto));
    
                       entity.setAlertas(ar);

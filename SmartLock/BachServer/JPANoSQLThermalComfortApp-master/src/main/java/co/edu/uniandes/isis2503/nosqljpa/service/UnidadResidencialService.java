@@ -31,7 +31,10 @@ import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.InmuebleDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.unidadRecidencialDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -71,7 +74,6 @@ private final unidadRecidencialLogic logica;
    @Secured({Role.Yale})
    public List<unidadRecidencialDTO> all() {
      List<unidadRecidencialEntity> lo = logica.all();
-      System.out.println(lo +"12412412");
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return uu.listToEntity(lo);
     }
