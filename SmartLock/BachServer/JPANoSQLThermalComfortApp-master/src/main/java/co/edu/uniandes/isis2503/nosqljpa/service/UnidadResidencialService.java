@@ -43,6 +43,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.core.MediaType;
 
 
@@ -127,22 +128,33 @@ private final unidadRecidencialLogic logica;
     * @param id3
     * @return 
     */
-    @GET
+   @GET
    @Path("{id}/Inmueble/{id2}/Alertas/{id3}")
    public AlertasDTO findAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3) {
           return logica.findAlertas(id, id2, id3);
     }
-
+    
+   @GET
+   @Path("{id}/Inmueble/{id2}/beforeToDay")
+   public List<AlertasDTO> findAlertasBeforeInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2) {
+       
+       
+         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
+         Date td = new Date();
+         String date = df.format(td);
+        return logica.AlertasBefore(id, id2, date);
+      
+    }
     /**
      * crea una nueva unidada residencial url: http://172.24.42.60:8080/UnidadResidencial/
      * @param dto de la nueva unidad
      * @return la unidad creada
      */
-    @POST
-    public unidadRecidencialDTO creat(unidadRecidencialDTO dto)
-    {
+   @POST
+   public unidadRecidencialDTO creat(unidadRecidencialDTO dto)
+   {
        
-        return logica.add(dto);
+       return logica.add(dto);
         
     }
    
