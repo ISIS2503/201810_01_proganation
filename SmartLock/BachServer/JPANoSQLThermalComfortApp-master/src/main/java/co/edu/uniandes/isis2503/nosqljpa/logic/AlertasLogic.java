@@ -21,66 +21,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.nosqljpa.model.dto.model;
+package co.edu.uniandes.isis2503.nosqljpa.logic;
 
-import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
-import java.util.Date;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
+import co.edu.uniandes.isis2503.nosqljpa.persistence.unidadRecidencialPersistance;
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
 /**
  *
  * @author js.palacios437
  */
-public class AlertasDTO {
+public class AlertasLogic {
     
-    private Long id;
+    private final unidadRecidencialPersistance persistance;
+   
     
-  
-    
-    private String tipoDeAlarma;
-
-     private String timeStamp;
-
-    public String getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public AlertasLogic()
+    {
+        this.persistance = new unidadRecidencialPersistance();
+       
     }
      
-    public AlertasDTO()
-    {
-        
-    }
-    public AlertasDTO(AlertasEntity entity)
-    {
-        this.id = entity.getId();
-   
-        this.tipoDeAlarma = entity.getTipoDeAlarma();
-        this.timeStamp = entity.getTimeStamp();
-    }
-    
-    public AlertasEntity toEntity(AlertasDTO dto)
-    {
-        return new AlertasEntity(dto);
-    }
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-
-    public String getTipoDeAlarma() {
-        return tipoDeAlarma;
-    }
-
-    public void setTipoDeAlarma(String tipoDeAlarma) {
-        this.tipoDeAlarma = tipoDeAlarma;
-    }
-
-    
+     public List<AlertasDTO> getAll()
+     {
+         return null;
+     }
+     
+     public List<AlertasDTO> getAllUnidad(Long id)
+     {
+         return null;
+     }
+      public List<AlertasDTO> getAllInmueble(Long id,Long id2)
+     {
+         return null;
+     }
+       
+     public List<AlertasDTO> getDispositivo(Long id,Long id2,Long id3)
+     {
+         return null;
+     }  
+     
+     public List<AlertasDTO> getMensualUnidad(Long id,String mes)
+     {
+         return null;
+     }
+     public List<AlertasDTO> getMensualInmueble(Long id,Long id2,String mes)
+     {
+         return null;
+     }
+     public AlertasDTO createAlarma(Long id,Long id2,Long id3,AlertasDTO dto)
+     {
+         return null;
+     }
 }

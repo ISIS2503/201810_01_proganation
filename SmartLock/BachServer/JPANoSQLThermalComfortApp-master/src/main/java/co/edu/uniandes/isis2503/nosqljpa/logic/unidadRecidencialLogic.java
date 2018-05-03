@@ -387,5 +387,8 @@ public class unidadRecidencialLogic {
              }
        }
        
-      
+      public DispositivoDTO silenciar(Long id,Long id2,Long id3)
+      {
+          return null;
+      }
 }

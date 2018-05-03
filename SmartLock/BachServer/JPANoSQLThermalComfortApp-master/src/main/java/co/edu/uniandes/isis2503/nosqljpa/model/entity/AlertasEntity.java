@@ -45,7 +45,7 @@ public class AlertasEntity implements Serializable {
     @Id
     private Long id;
     
-    private String idlock;
+ 
     
     private String tipoDeAlarma;
     
@@ -63,7 +63,7 @@ public class AlertasEntity implements Serializable {
             public AlertasEntity(AlertasDTO dto)
       {
           this.id = dto.getId();
-          this.idlock = dto.getIdlock();
+        
           this.tipoDeAlarma = dto.getTipoDeAlarma();
           this.timeStamp = dto.getTimeStamp();
       }
@@ -90,13 +90,7 @@ public class AlertasEntity implements Serializable {
         this.id = id;
     }
 
-    public String getIdlock() {
-        return idlock;
-    }
 
-    public void setIdlock(String idlock) {
-        this.idlock = idlock;
-    }
 
     public String getTipoDeAlarma() {
         return tipoDeAlarma;

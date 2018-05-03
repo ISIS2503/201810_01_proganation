@@ -87,6 +87,12 @@ private final unidadRecidencialLogic logica;
     public unidadRecidencialDTO find(@PathParam("id") Long id) {
         return logica.find(id);
     }
+    
+    /**
+     * regresa todos los inmuebles de una unidad residencial
+     * @param id
+     * @return 
+     */
     @GET
     @Secured({Role.admin})
    @Path("{id}/Inmueble")
@@ -114,7 +120,7 @@ private final unidadRecidencialLogic logica;
    @GET
    @Secured({Role.user})
    @Path("{id}/Inmueble/{id2}/Dispositivos")
-   public List<DispositivoDTO> allAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2) {
+   public List<DispositivoDTO> allDispositivos(@PathParam("id") Long id,@PathParam("id2") Long id2) {
      List<DispositivoDTO> lista = logica.allDispositivos(id, id2);
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return  lista;
@@ -128,7 +134,7 @@ private final unidadRecidencialLogic logica;
     */
    @GET
    @Path("{id}/Inmueble/{id2}/Dispositivo/{id3}")
-   public DispositivoDTO findAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3) {
+   public DispositivoDTO findDispositivos(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3) {
           return logica.findDispositivo(id, id2, id3);
     }
     
@@ -176,7 +182,7 @@ private final unidadRecidencialLogic logica;
      */
     @POST
     @Path("{id}/Inmueble/{id2}")
-    public DispositivoDTO creatAlerta(@PathParam("id") Long id,@PathParam("id2") Long id2,DispositivoDTO dto)
+    public DispositivoDTO creatDispositivo(@PathParam("id") Long id,@PathParam("id2") Long id2,DispositivoDTO dto)
     {
         return logica.addDispositivo(id,id2,dto);
     }
@@ -201,5 +207,11 @@ private final unidadRecidencialLogic logica;
         return logica.desabilitarInmueble(id,id2);
     }
     
+    @GET
+    @Path("{id}/Inmueble/{id2}/Dispositivo/{id3}/silenciar")
+    public DispositivoDTO creatDispositivo(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3)
+    {
+        return logica.silenciar(id,id2,id3);
+    }
     
 }
