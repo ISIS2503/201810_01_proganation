@@ -35,6 +35,7 @@ import co.edu.uniandes.isis2503.nosqljpa.persistence.unidadRecidencialPersistanc
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -193,11 +194,144 @@ public class AlertasLogic {
      
      public List<AlertasDTO> getMensualUnidad(Long id,String mes)
      {
-         return null;
+         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
+         ArrayList<AlertasDTO> con =(ArrayList<AlertasDTO>) getAllUnidad(id);
+        if(con==null)
+            return null;
+        else
+        {
+        ArrayList<AlertasDTO> res = new ArrayList<AlertasDTO>();
+         Calendar cal1 = Calendar.getInstance();
+         Calendar cal2 = Calendar.getInstance();
+         Date date = new Date();
+             switch(mes){
+            case "Enero": 
+                 date.setMonth(0);               
+            break;
+              case "Febrero":
+                   date.setMonth(1);  
+            break;
+              case "Marzo": 
+                   date.setMonth(2);  
+            break;
+              case "Abril": 
+                   date.setMonth(3);  
+            break;
+              case "Mayo": 
+                   date.setMonth(4);  
+            break;
+              case "Junio": 
+                   date.setMonth(5);  
+            break;
+              case "Julio": 
+                   date.setMonth(6);  
+            break;
+               case "Agosto": 
+                    date.setMonth(7);  
+            break;
+               case "Septiembre": 
+                    date.setMonth(8);  
+            break;
+               case "Octubre": 
+                    date.setMonth(9);  
+            break;
+               case "Novienbre": 
+                    date.setMonth(10);  
+            break;
+               case "Diciembre": 
+                    date.setMonth(11);  
+            break;     
+        }
+         cal1.setTime(date);
+         
+         for(int i=0 ;i<con.size();i++)
+         {
+             AlertasDTO al = con.get(i);
+             try {
+                 Date nd = df.parse(al.getTimeStamp());
+                 cal2.setTime(nd);
+                 if(cal2.get(Calendar.MONTH)== cal1.get(Calendar.MONTH))
+                 {
+                     res.add(al);
+                 }
+             } catch (Exception e) {
+                 return null;
+             }
+             
+         }
+         return res;  
+        }
+     
      }
      public List<AlertasDTO> getMensualInmueble(Long id,Long id2,String mes)
      {
-         return null;
+         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
+         ArrayList<AlertasDTO> con =(ArrayList<AlertasDTO>) getAllInmueble(id,id2);
+        if(con==null)
+            return null;
+        else
+        {
+        ArrayList<AlertasDTO> res = new ArrayList<AlertasDTO>();
+         Calendar cal1 = Calendar.getInstance();
+         Calendar cal2 = Calendar.getInstance();
+         Date date = new Date();
+             switch(mes){
+            case "Enero": 
+                 date.setMonth(0);               
+            break;
+              case "Febrero":
+                   date.setMonth(1);  
+            break;
+              case "Marzo": 
+                   date.setMonth(2);  
+            break;
+              case "Abril": 
+                   date.setMonth(3);  
+            break;
+              case "Mayo": 
+                   date.setMonth(4);  
+            break;
+              case "Junio": 
+                   date.setMonth(5);  
+            break;
+              case "Julio": 
+                   date.setMonth(6);  
+            break;
+               case "Agosto": 
+                    date.setMonth(7);  
+            break;
+               case "Septiembre": 
+                    date.setMonth(8);  
+            break;
+               case "Octubre": 
+                    date.setMonth(9);  
+            break;
+               case "Novienbre": 
+                    date.setMonth(10);  
+            break;
+               case "Diciembre": 
+                    date.setMonth(11);  
+            break;     
+        }
+         cal1.setTime(date);
+         
+         for(int i=0 ;i<con.size();i++)
+         {
+             AlertasDTO al = con.get(i);
+             try {
+                 Date nd = df.parse(al.getTimeStamp());
+                 cal2.setTime(nd);
+                 if(cal2.get(Calendar.MONTH)== cal1.get(Calendar.MONTH))
+                 {
+                     res.add(al);
+                 }
+             } catch (Exception e) {
+                 return null;
+             }
+             
+         }
+         return res;  
+        }
      }
      public AlertasDTO createAlarma(Long id,Long id2,Long id3,AlertasDTO dto)
      {
