@@ -61,11 +61,78 @@ public class AlertasLogic {
      
      public List<AlertasDTO> getAllUnidad(Long id)
      {
-         return null;
+        unidadRecidencialEntity result = persistance.find(id);      
+          ArrayList<AlertasDTO> dd = new ArrayList<AlertasDTO>() ;
+            if(result != null)
+              {
+                 ArrayList<InmuebleEntity> list = (ArrayList<InmuebleEntity>) result.getCasas();
+                  for( int i=0 ;i<list.size();i++)
+                  {
+                      InmuebleEntity in = list.get(i);
+                     ArrayList<DispositivoEntity>  al = (ArrayList<DispositivoEntity>) in.getDispositivos();       
+                         for(int j =0;j<al.size();j++)
+                           {                     
+                    
+                            DispositivoEntity kk = al.get(j);  
+                          dd.addAll(kk.alerToDto()); 
+                               System.out.println(dd + "fdsfdsfdsfdsfdsfdsfdsfdsfds");
+                         }
+                  
+                
+                  }
+                  
+                  return dd;
+              }
+         
+              else
+              {
+                  return null;
+              }
      }
       public List<AlertasDTO> getAllInmueble(Long id,Long id2)
      {
-         return null;
+         unidadRecidencialEntity result = persistance.find(id);
+             
+           InmuebleEntity entity= null;
+           InmuebleEntity inmu = null;
+           ArrayList<DispositivoEntity> al = new ArrayList<DispositivoEntity>();
+           ArrayList<InmuebleEntity> list = new ArrayList<InmuebleEntity>();
+          ArrayList<AlertasDTO> dd = new ArrayList<AlertasDTO>() ;
+            if(result != null)
+              {
+                  
+                  boolean buscar = false;
+                  list = (ArrayList<InmuebleEntity>) result.getCasas();
+                  for( int i=0 ;i<list.size()&& !buscar;i++)
+                  {
+                    if(list.get(i).getId() == id2)
+                      {
+                           entity = list.get(i);
+                           buscar = true;
+                      }
+                  }
+                  
+                  inmu = entity;
+              }
+              if(inmu!=null)
+              {
+                              
+                  al = (ArrayList<DispositivoEntity>) inmu.getDispositivos();       
+                  for(int i =0;i<al.size();i++)
+                  {                     
+                   
+                      DispositivoEntity kk = al.get(i);  
+                      dd.addAll(kk.alerToDto());
+                    
+                  }
+                  
+                  return dd;
+              }
+        
+              else
+              {
+                  return null;
+              }
      }
        
      public List<AlertasDTO> getDispositivo(Long id,Long id2,Long id3)
@@ -101,11 +168,13 @@ public class AlertasLogic {
                   {                     
                    
                       DispositivoEntity kk = al.get(i);  
-                      System.out.println(kk.getAlertas().size());
+                    
                       if(kk.getId()==id3)
                       {
-                        encontro = true;
+                        System.err.println(kk.getAlertas());
                         dd = kk.alerToDto();
+                        encontro = true;
+                     
                                      
                       }
                   }
