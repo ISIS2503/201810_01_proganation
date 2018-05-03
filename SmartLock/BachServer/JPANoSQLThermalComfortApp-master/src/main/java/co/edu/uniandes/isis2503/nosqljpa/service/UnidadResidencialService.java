@@ -27,15 +27,12 @@ package co.edu.uniandes.isis2503.nosqljpa.service;
 import co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthorizationFilter.Role;
 import co.edu.uniandes.isis2503.nosqljpa.authentificacion.Secured;
 import co.edu.uniandes.isis2503.nosqljpa.logic.unidadRecidencialLogic;
-import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
+
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.InmuebleDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.unidadRecidencialDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -44,7 +41,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.HeaderParam;
+
 import javax.ws.rs.core.MediaType;
 
 
@@ -116,9 +113,9 @@ private final unidadRecidencialLogic logica;
     */
    @GET
    @Secured({Role.user})
-   @Path("{id}/Inmueble/{id2}/Alertas")
+   @Path("{id}/Inmueble/{id2}/Dispositivos")
    public List<DispositivoDTO> allAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2) {
-     List<DispositivoDTO> lista = logica.allAlertas(id, id2);
+     List<DispositivoDTO> lista = logica.allDispositivos(id, id2);
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return  lista;
     }
@@ -130,9 +127,9 @@ private final unidadRecidencialLogic logica;
     * @return 
     */
    @GET
-   @Path("{id}/Inmueble/{id2}/Alertas/{id3}")
+   @Path("{id}/Inmueble/{id2}/Dispositivo/{id3}")
    public DispositivoDTO findAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3) {
-          return logica.findAlertas(id, id2, id3);
+          return logica.findDispositivo(id, id2, id3);
     }
     
 //   @GET
@@ -153,11 +150,9 @@ private final unidadRecidencialLogic logica;
      */
    @POST
    public unidadRecidencialDTO creat(unidadRecidencialDTO dto)
-   {
-       
-       return logica.add(dto);
-        
-    }
+   {     
+       return logica.add(dto);      
+   }
    
     /**
      * metodo que crea y agrega un inmueble a la unidad residencial  url http://172.24.42.60:8080/UnidadResidencial/1/Inmueble/
@@ -183,7 +178,7 @@ private final unidadRecidencialLogic logica;
     @Path("{id}/Inmueble/{id2}")
     public DispositivoDTO creatAlerta(@PathParam("id") Long id,@PathParam("id2") Long id2,DispositivoDTO dto)
     {
-        return logica.addAlerta(id,id2,dto);
+        return logica.addDispositivo(id,id2,dto);
     }
     
     /**

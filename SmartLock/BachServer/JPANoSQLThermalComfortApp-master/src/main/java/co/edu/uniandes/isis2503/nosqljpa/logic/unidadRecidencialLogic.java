@@ -197,7 +197,7 @@ public class unidadRecidencialLogic {
            * @param id2
            * @return 
            */
-             public List<DispositivoDTO> allAlertas(Long id ,Long id2)
+             public List<DispositivoDTO> allDispositivos(Long id ,Long id2)
           {
                 unidadRecidencialEntity result = persistance.find(id);
                 InmuebleEntity inmu = null;
@@ -243,7 +243,7 @@ public class unidadRecidencialLogic {
               * @param id3
               * @return 
               */
-              public DispositivoDTO findAlertas(Long id ,Long id2,Long id3)
+              public DispositivoDTO findDispositivo(Long id ,Long id2,Long id3)
           {
              unidadRecidencialEntity result = persistance.find(id);
              DispositivoEntity alert = new DispositivoEntity();
@@ -297,7 +297,7 @@ public class unidadRecidencialLogic {
            * @param dto la alerta
            * @return la lareta agregada
            */
-          public DispositivoDTO addAlerta(Long id,Long id2,DispositivoDTO dto)
+          public DispositivoDTO addDispositivo(Long id,Long id2,DispositivoDTO dto)
           {
                 unidadRecidencialEntity result = persistance.find(id);
                 Boolean buscar = false;

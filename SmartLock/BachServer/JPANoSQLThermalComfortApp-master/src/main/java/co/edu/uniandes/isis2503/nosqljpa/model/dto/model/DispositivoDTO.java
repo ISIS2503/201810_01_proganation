@@ -55,7 +55,7 @@ public class DispositivoDTO  {
         this.id = entity.getId();
         this.tipo = entity.getTipo();
         this.activa = entity.getActiva();
-        alertas = new ArrayList<AlertasDTO>();
+        this.alertas = new ArrayList<AlertasDTO>();
        // alertas = entity.getAlertas();
     }
 
