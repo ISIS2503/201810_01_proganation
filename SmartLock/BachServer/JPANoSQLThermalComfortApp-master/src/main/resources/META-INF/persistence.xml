@@ -5,6 +5,7 @@
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity</class>
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity</class>
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity</class>
+    <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.connection.autocommit" value="true"/>
@@ -30,6 +31,7 @@
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity</class>
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity</class>
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity</class>
+    <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="kundera.nodes" value="172.24.42.60"/>

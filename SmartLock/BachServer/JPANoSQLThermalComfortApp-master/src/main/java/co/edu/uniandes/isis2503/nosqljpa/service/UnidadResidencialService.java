@@ -28,6 +28,7 @@ import co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthorizationFilter.Ro
 import co.edu.uniandes.isis2503.nosqljpa.authentificacion.Secured;
 import co.edu.uniandes.isis2503.nosqljpa.logic.unidadRecidencialLogic;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.InmuebleDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.unidadRecidencialDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity;
@@ -116,8 +117,8 @@ private final unidadRecidencialLogic logica;
    @GET
    @Secured({Role.user})
    @Path("{id}/Inmueble/{id2}/Alertas")
-   public List<AlertasDTO> allAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2) {
-     List<AlertasDTO> lista = logica.allAlertas(id, id2);
+   public List<DispositivoDTO> allAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2) {
+     List<DispositivoDTO> lista = logica.allAlertas(id, id2);
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return  lista;
     }
@@ -130,21 +131,21 @@ private final unidadRecidencialLogic logica;
     */
    @GET
    @Path("{id}/Inmueble/{id2}/Alertas/{id3}")
-   public AlertasDTO findAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3) {
+   public DispositivoDTO findAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3) {
           return logica.findAlertas(id, id2, id3);
     }
     
-   @GET
-   @Path("{id}/Inmueble/{id2}/beforeToDay")
-   public List<AlertasDTO> findAlertasBeforeInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2) {
-       
-       
-         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
-         Date td = new Date();
-         String date = df.format(td);
-        return logica.AlertasBefore(id, id2, date);
-      
-    }
+//   @GET
+//   @Path("{id}/Inmueble/{id2}/beforeToDay")
+//   public List<AlertasDTO> findAlertasBeforeInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2) {
+//       
+//       
+//         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
+//         Date td = new Date();
+//         String date = df.format(td);
+//        return logica.AlertasBefore(id, id2, date);
+//      
+//    }
     /**
      * crea una nueva unidada residencial url: http://172.24.42.60:8080/UnidadResidencial/
      * @param dto de la nueva unidad
@@ -180,7 +181,7 @@ private final unidadRecidencialLogic logica;
      */
     @POST
     @Path("{id}/Inmueble/{id2}")
-    public AlertasDTO creatAlerta(@PathParam("id") Long id,@PathParam("id2") Long id2,AlertasDTO dto)
+    public DispositivoDTO creatAlerta(@PathParam("id") Long id,@PathParam("id2") Long id2,DispositivoDTO dto)
     {
         return logica.addAlerta(id,id2,dto);
     }

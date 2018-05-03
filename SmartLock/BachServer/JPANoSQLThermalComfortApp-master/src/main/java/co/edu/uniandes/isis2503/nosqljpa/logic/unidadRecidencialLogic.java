@@ -24,9 +24,11 @@
 package co.edu.uniandes.isis2503.nosqljpa.logic;
 
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.InmuebleDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.unidadRecidencialDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
+import co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity;
 import co.edu.uniandes.isis2503.nosqljpa.persistence.unidadRecidencialPersistance;
@@ -195,7 +197,7 @@ public class unidadRecidencialLogic {
            * @param id2
            * @return 
            */
-             public List<AlertasDTO> allAlertas(Long id ,Long id2)
+             public List<DispositivoDTO> allAlertas(Long id ,Long id2)
           {
                 unidadRecidencialEntity result = persistance.find(id);
                 InmuebleEntity inmu = null;
@@ -219,16 +221,12 @@ public class unidadRecidencialLogic {
               if(inmu!=null)
               {
                   
-                  ArrayList<AlertasEntity> al = (ArrayList<AlertasEntity>) inmu.getAlertas();
-                  ArrayList<AlertasDTO> ar = new ArrayList<>();
-                             System.out.println( al.size() +" 1232131232131232123123564554645123123");
-                    System.out.println( al +" 234324");
-                           System.out.println( ar.size() +" 234234324");
-                    System.out.println( ar +" 23423");
+                  ArrayList<DispositivoEntity> al = (ArrayList<DispositivoEntity>) inmu.getDispositivos();
+                  ArrayList<DispositivoDTO> ar = new ArrayList<>();
                   for(int i =0;i<al.size();i++)
                   {
-                      AlertasEntity kk = al.get(i);
-                      ar.add(kk.toDTO(kk));
+                      DispositivoEntity kk = al.get(i);
+                      ar.add(kk.entityToDto(kk));
                   }
                  
                   return ar;
@@ -245,10 +243,10 @@ public class unidadRecidencialLogic {
               * @param id3
               * @return 
               */
-              public AlertasDTO findAlertas(Long id ,Long id2,Long id3)
+              public DispositivoDTO findAlertas(Long id ,Long id2,Long id3)
           {
              unidadRecidencialEntity result = persistance.find(id);
-             AlertasEntity alert = new AlertasEntity();
+             DispositivoEntity alert = new DispositivoEntity();
                 InmuebleEntity inmu = null;
                if(result != null)
               {
@@ -271,12 +269,12 @@ public class unidadRecidencialLogic {
               {
                   Boolean encontro = false;
                
-                  ArrayList<AlertasEntity> al = (ArrayList<AlertasEntity>) inmu.getAlertas();
+                  ArrayList<DispositivoEntity> al = (ArrayList<DispositivoEntity>) inmu.getDispositivos();
          
                   for(int i =0;i<al.size();i++)
                   {
                        
-                      AlertasEntity kk = al.get(i);
+                      DispositivoEntity kk = al.get(i);
            
                       if(kk.getId()==id3)
                       {
@@ -285,7 +283,7 @@ public class unidadRecidencialLogic {
                           encontro =true;
                       }
                   }
-                  return alert.toDTO(alert);
+                  return alert.entityToDto(alert);
               }
               else
               {
@@ -299,7 +297,7 @@ public class unidadRecidencialLogic {
            * @param dto la alerta
            * @return la lareta agregada
            */
-          public AlertasDTO addAlerta(Long id,Long id2,AlertasDTO dto)
+          public DispositivoDTO addAlerta(Long id,Long id2,DispositivoDTO dto)
           {
                 unidadRecidencialEntity result = persistance.find(id);
                 Boolean buscar = false;
@@ -322,15 +320,15 @@ public class unidadRecidencialLogic {
                    
                   if(entity != null)
                   {
-                      ArrayList<AlertasEntity> ar = (ArrayList<AlertasEntity>) entity.getAlertas();
-                          DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
-                           Date dateobj = new Date(); 
-                         String ss =  df.format(dateobj);
+                      ArrayList<DispositivoEntity> ar = (ArrayList<DispositivoEntity>) entity.getDispositivos();
+                      //    DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
+                         //  Date dateobj = new Date(); 
+                       //  String ss =  df.format(dateobj);
                         
-                            dto.setTimeStamp(ss);
-                      ar.add(dto.toEntity(dto));
+                         //   dto.setTimeStamp(ss);
+                      ar.add(dto.DtoToEntity(dto));
    
-                      entity.setAlertas(ar);
+                      entity.setDispositivos(ar);
                       list.set(cont,entity);
                       result.setCasas(list);
                      persistance.update(result);    
@@ -346,29 +344,29 @@ public class unidadRecidencialLogic {
           }
           
           
-       public List<AlertasDTO> AlertasBefore(Long id,Long id2,String Date)
-       {
-           DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
-           try {
-               Date dd = df.parse(Date);
-               ArrayList<AlertasDTO> alerts =  (ArrayList<AlertasDTO>) allAlertas(id,id2);
-               ArrayList<AlertasDTO> res = new ArrayList<>();
-              for(int i =0;i<alerts.size();i++)
-              {
-                  AlertasDTO al = alerts.get(i);
-                  Date cd = df.parse(al.getTimeStamp());
-                  if(cd.before(dd))
-                  {
-                      res.add(al);
-                  }
-              }
-                return res;
-           } catch (Exception e) {
-               return null;
-           }
+     //  public List<AlertasDTO> AlertasBefore(Long id,Long id2,String Date)
+     //  {
+       //    DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
+       //    try {
+       //        Date dd = df.parse(Date);
+       //        ArrayList<AlertasDTO> alerts =  (ArrayList<AlertasDTO>) allAlertas(id,id2);
+        //       ArrayList<AlertasDTO> res = new ArrayList<>();
+       //       for(int i =0;i<alerts.size();i++)
+        //      {
+        //          AlertasDTO al = alerts.get(i);
+        //          Date cd = df.parse(al.getTimeStamp());
+         //         if(cd.before(dd))
+         //         {
+         //             res.add(al);
+          //        }
+         //     }
+         //       return res;
+        //   } catch (Exception e) {
+        //       return null;
+       //   }
          
            
-       }
+      // }
        public List<InmuebleDTO> allIn(Long id)
        {
              unidadRecidencialEntity result = persistance.find(id);

@@ -23,48 +23,50 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.model.dto.model;
 
-
-import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity;
-import co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Id;
+
 
 /**
  *
  * @author js.palacios437
  */
-public class InmuebleDTO {
+public class DispositivoDTO  {
     
+    @Id
     private Long id;
     
-    private Boolean activo = true;
+    private String tipo;
     
-    private List<DispositivoDTO> dispositivo;
+    private Boolean activa;
     
-    public InmuebleDTO()
+    private List<AlertasDTO> alertas;
+    
+    public DispositivoDTO()
     {
-        dispositivo = new ArrayList<>();
+        alertas = new ArrayList<AlertasDTO>();
+        this.activa = false;
     }
-    
-     public InmuebleDTO(InmuebleEntity entity)
+    public DispositivoDTO(DispositivoEntity entity)
     {
         this.id = entity.getId();
-        ArrayList<DispositivoEntity> al = (ArrayList<DispositivoEntity>) entity.getDispositivos();
-        ArrayList<DispositivoDTO> ar = new ArrayList<>();
-        for(int i=0;i<al.size();i++)
-        {
-            ar.add(al.get(i).entityToDto(al.get(i)));
-        }
-        this.dispositivo = ar;
-        this.activo = entity.getActivo();
+        this.tipo = entity.getTipo();
+        this.activa = entity.getActiva();
+        alertas = new ArrayList<AlertasDTO>();
+       // alertas = entity.getAlertas();
     }
-     
-     public InmuebleEntity toEntity(InmuebleDTO dto)
-     {
-         return new InmuebleEntity(dto);
-     }
 
+    public DispositivoDTO entityToDto(DispositivoEntity entity)
+    {
+        return new DispositivoDTO(entity);
+    }
+        public DispositivoEntity DtoToEntity(DispositivoDTO dto)
+    {
+        return new DispositivoEntity(dto);
+    }
     public Long getId() {
         return id;
     }
@@ -73,22 +75,29 @@ public class InmuebleDTO {
         this.id = id;
     }
 
-    public List<DispositivoDTO> getDispositivo() {
-        return dispositivo;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setDispositivo(List<DispositivoDTO> dispositivo) {
-        this.dispositivo = dispositivo;
-    }
-   
-
-
-    public Boolean getActivo() {
-        return activo;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public Boolean getActiva() {
+        return activa;
     }
+
+    public List<AlertasDTO> getAlertas() {
+        return alertas;
+    }
+
+    public void setAlertas(List<AlertasDTO> alertas) {
+        this.alertas = alertas;
+    }
+
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
+    }
+    
     
 }
