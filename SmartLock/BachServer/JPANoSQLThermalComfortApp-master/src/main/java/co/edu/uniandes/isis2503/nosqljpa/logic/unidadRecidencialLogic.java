@@ -23,19 +23,14 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.logic;
 
-import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.InmuebleDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.unidadRecidencialDTO;
-import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity;
 import co.edu.uniandes.isis2503.nosqljpa.persistence.unidadRecidencialPersistance;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -130,12 +125,11 @@ public class unidadRecidencialLogic {
               {
                   InmuebleEntity in = new InmuebleEntity(dto);
                   ArrayList<InmuebleEntity> ar =  (ArrayList)result.getCasas();
-                   System.out.println( ar.size()+" 01232132131212321321");
+          
                   ar.add(in);
-                  System.out.println( ar +" 012321321312321");
+             
                   result.setCasas(ar);
-                  System.out.println( ar.size()+" 012321321312321");
-                   System.out.println( result.getCasas() +" 012321321312321");
+              
                   persistance.update(result);
                   return dto;
               }

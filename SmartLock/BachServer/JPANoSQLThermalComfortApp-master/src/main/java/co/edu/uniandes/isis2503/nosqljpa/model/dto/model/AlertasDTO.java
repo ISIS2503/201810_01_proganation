@@ -55,9 +55,9 @@ public class AlertasDTO {
     public AlertasDTO(AlertasEntity entity)
     {
         this.id = entity.getId();
-   
         this.tipoDeAlarma = entity.getTipoDeAlarma();
         this.timeStamp = entity.getTimeStamp();
+        
     }
     
     public AlertasEntity toEntity(AlertasDTO dto)

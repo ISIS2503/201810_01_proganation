@@ -45,8 +45,6 @@ public class AlertasEntity implements Serializable {
     @Id
     private Long id;
     
- 
-    
     private String tipoDeAlarma;
     
     private String timeStamp;
@@ -58,12 +56,11 @@ public class AlertasEntity implements Serializable {
       
       public AlertasEntity()
       {
-          
+      
       }
             public AlertasEntity(AlertasDTO dto)
       {
           this.id = dto.getId();
-        
           this.tipoDeAlarma = dto.getTipoDeAlarma();
           this.timeStamp = dto.getTimeStamp();
       }

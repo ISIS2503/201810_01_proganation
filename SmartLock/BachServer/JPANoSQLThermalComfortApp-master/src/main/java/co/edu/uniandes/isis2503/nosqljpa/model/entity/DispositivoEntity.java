@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 package co.edu.uniandes.isis2503.nosqljpa.model.entity;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -115,4 +116,14 @@ public class DispositivoEntity implements Serializable{
         this.Alertas = Alertas;
     }
     
+    public List<AlertasDTO> alerToDto()
+    {
+        ArrayList<AlertasDTO> res = new ArrayList<AlertasDTO>();
+        for(int i=0;i<this.Alertas.size();i++)
+        {
+            AlertasEntity aa = Alertas.get(i);
+            res.add(aa.toDTO(aa));
+        }
+        return res;
+    }
 }

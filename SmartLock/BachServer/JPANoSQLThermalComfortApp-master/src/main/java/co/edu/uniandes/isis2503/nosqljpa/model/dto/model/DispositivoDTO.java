@@ -24,7 +24,6 @@
 package co.edu.uniandes.isis2503.nosqljpa.model.dto.model;
 
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Id;
@@ -56,7 +55,7 @@ public class DispositivoDTO  {
         this.tipo = entity.getTipo();
         this.activa = entity.getActiva();
         this.alertas = new ArrayList<AlertasDTO>();
-       // alertas = entity.getAlertas();
+        this.alertas = entity.alerToDto();
     }
 
     public DispositivoDTO entityToDto(DispositivoEntity entity)
