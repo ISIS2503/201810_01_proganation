@@ -199,13 +199,20 @@ private final unidadRecidencialLogic logica;
     {
         return logica.desabilitar(id);
     }
-    
-   @DELETE
-   @Path("{id}/Inmueble/{id2}")
-   public InmuebleDTO desactibarInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2)
+    @DELETE
+  @Path("{id}/Inmueble/{id2}")
+   public InmuebleDTO desactivarInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2)
     {
         return logica.desabilitarInmueble(id,id2);
-    }
+  }
+
+   @DELETE
+  @Path("{id}/Inmueble/{id2}/Dispositivo/{id3}")
+  public DispositivoDTO desactivarDispositivo(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3)
+   {
+        return logica.desabilitarDispositivo(id,id2,id3);
+   }
+
     
     @GET
     @Path("{id}/Inmueble/{id2}/Dispositivo/{id3}/silenciar")

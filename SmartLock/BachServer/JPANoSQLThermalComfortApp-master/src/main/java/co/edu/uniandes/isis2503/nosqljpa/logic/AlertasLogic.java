@@ -342,8 +342,13 @@ public class AlertasLogic {
                  ArrayList<DispositivoEntity> al = new ArrayList<DispositivoEntity>();
                   ArrayList<InmuebleEntity> list = new ArrayList<InmuebleEntity>();
                   int ij =0 ;
-               if(result != null)
+               if(result != null )
               {
+                if(!result.getActivo())
+                {
+                    return null;
+                }
+                  
                   boolean buscar = false;
                   list = (ArrayList<InmuebleEntity>) result.getCasas();
                   for( ij=0 ;ij<list.size()&& !buscar;ij++)
@@ -359,6 +364,10 @@ public class AlertasLogic {
               }
               if(inmu!=null)
               {
+                   if(!inmu.getActivo())
+                {
+                    return null;
+                }
                   Boolean encontro = false;               
                   al = (ArrayList<DispositivoEntity>) inmu.getDispositivos();       
                   for(int i =0;i<al.size();i++)
@@ -368,6 +377,11 @@ public class AlertasLogic {
                       System.out.println(kk.getAlertas().size());
                       if(kk.getId()==id3)
                       {
+                      if(!kk.getActiva())
+                      {
+                      return null;
+     
+                      }
                        ArrayList<AlertasEntity> alerts = new ArrayList<AlertasEntity>();
                        alerts = (ArrayList<AlertasEntity>) kk.getAlertas();
                           
