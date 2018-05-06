@@ -25,7 +25,8 @@ package co.edu.uniandes.isis2503.nosqljpa.service;
 
 
 import co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthorizationFilter.Role;
-import co.edu.uniandes.isis2503.nosqljpa.authentificacion.Secured;
+import co.edu.uniandes.isis2503.nosqljpa.authentificacion.*;
+import static co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthenticationFilter.AUTHENTICATION_SCHEME;
 import co.edu.uniandes.isis2503.nosqljpa.logic.unidadRecidencialLogic;
 
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
@@ -41,8 +42,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.HttpHeaders;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 /**
@@ -71,7 +76,13 @@ private final unidadRecidencialLogic logica;
      */
    @GET
    @Secured({Role.Yale})
-   public List<unidadRecidencialDTO> all() {
+   public List<unidadRecidencialDTO> all(@HeaderParam("Role") String rol) {
+       if(!rol.equalsIgnoreCase("Yale"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
      List<unidadRecidencialEntity> lo = logica.all();
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return uu.listToEntity(lo);
@@ -84,7 +95,13 @@ private final unidadRecidencialLogic logica;
     @GET
     @Secured({Role.Secure})
     @Path("/{id}")
-    public unidadRecidencialDTO find(@PathParam("id") Long id) {
+    public unidadRecidencialDTO find(@PathParam("id") Long id,@HeaderParam("Role") String rol) {
+        if(!rol.equalsIgnoreCase("Secure"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
         return logica.find(id);
     }
     
@@ -96,7 +113,13 @@ private final unidadRecidencialLogic logica;
     @GET
     @Secured({Role.admin})
    @Path("{id}/Inmueble")
-   public List<InmuebleDTO> allInmueble(@PathParam("id") Long id) {
+   public List<InmuebleDTO> allInmueble(@PathParam("id") Long id,@HeaderParam("Role") String rol) {
+       if(!rol.equalsIgnoreCase("admin"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
       return logica.allIn(id);
    }
    /**
@@ -108,7 +131,13 @@ private final unidadRecidencialLogic logica;
    @GET
    @Secured({Role.user})
    @Path("{id}/Inmueble/{id2}")
-   public InmuebleDTO findInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2) {
+   public InmuebleDTO findInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2,@HeaderParam("Role") String rol) {
+       if(!rol.equalsIgnoreCase("user"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
       return logica.findIn(id,id2);
    }
    /**
@@ -120,7 +149,13 @@ private final unidadRecidencialLogic logica;
    @GET
    @Secured({Role.user})
    @Path("{id}/Inmueble/{id2}/Dispositivos")
-   public List<DispositivoDTO> allDispositivos(@PathParam("id") Long id,@PathParam("id2") Long id2) {
+   public List<DispositivoDTO> allDispositivos(@PathParam("id") Long id,@PathParam("id2") Long id2,@HeaderParam("Role") String rol) {
+       if(!rol.equalsIgnoreCase("user"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
      List<DispositivoDTO> lista = logica.allDispositivos(id, id2);
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return  lista;
