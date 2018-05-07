@@ -48,6 +48,7 @@ import javax.ws.rs.core.HttpHeaders;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 
 /**
@@ -87,6 +88,14 @@ private final unidadRecidencialLogic logica;
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return uu.listToEntity(lo);
     }
+   
+     @GET
+    @Path("/hb")
+   public int hb() {
+   
+       return 200;
+    }
+   
     /**
      * metodo que regresa una unidad en particular url: http://172.24.42.60:8080/UnidadResidencial/1
      * @param id de la unidad
