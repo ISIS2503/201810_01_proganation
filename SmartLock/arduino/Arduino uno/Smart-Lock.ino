@@ -5,6 +5,7 @@
 
 
 //
+int tHeartBeat =0;
 String id ="1";
 String recidencia ="1";
 String apto="701";
@@ -167,8 +168,15 @@ void loop(){
   checkBattery();
   password();
   receiveData();
+  tHeartBeat++;
+  if(tHeartBeat>200){
+  heartBeat();
+  tHeartBeat=0;
+  }
 }
-
+void heartBeat(){
+  Serial.println("<");
+}
 //Method that outputs the RGB specified color
 void setColor(int redValue, int greenValue, int blueValue) {
   analogWrite(R_LED_PIN, redValue);

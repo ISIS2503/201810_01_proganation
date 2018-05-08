@@ -3,12 +3,14 @@
 
 //DEFINES
 #define TOPIC_SUBSCRIBE        "lock/casa/puerta1"
-#define  TOPIC_PUBLISH          "lock/casa/puerta3"
+#define  TOPIC_PUBLISH          "lock/casa/puerta2"
+#define  TOPIC_HEARTBEAT          "casa/lock/heartbeat"
 #define SIZE_BUFFER_DATA       150                  
 
 //VARIABLES
 const char* idDevice = "ISIS2503";
 boolean     stringComplete = false;
+boolean     heartBeat =false;
 boolean     init_flag = false;
 String      inputString = "";
 char        bufferData [SIZE_BUFFER_DATA];
@@ -18,8 +20,8 @@ WiFiClient    clientWIFI;
 PubSubClient  clientMQTT(clientWIFI);
 
 // CONFIG WIFI
-//const char* ssid = "ISIS2503";
-//const char* password = "Yale2018";
+//const char* ssid = "isis2503";
+//const char* password = "Yale2018.";
 const char* ssid = "FAMILIAZALAZAR";
 const char* password = "79276289";
 
@@ -28,9 +30,10 @@ const char* password = "79276289";
 //172.24.42.97 MV
 IPAddress serverMQTT (192,168,0,16);
 //default 1883
+// MV 8083
 const uint16_t portMQTT = 1883;
-// const char* usernameMQTT = "admin";
-// const char* passwordMQTT = "admin";
+// const char* usernameMQTT = "lock";
+// const char* passwordMQTT = "yale";
 
 void connectWIFI() {
   // Conectar a la red WiFi
@@ -110,18 +113,23 @@ void connectMQTT(){
   }
   }
 void processData() {
-
+if(heartBeat && clientMQTT.connected()){
+  if(clientMQTT.publish(TOPIC_HEARTBEAT, bufferData)){
+    inputString = "";
+    heartBeat=false;
+  }
+   init_flag = false;
+}
     if (stringComplete && clientMQTT.connected()) {
        
-      if(clientMQTT.publish(TOPIC_SUBSCRIBE, bufferData)) {
+      if(clientMQTT.publish(TOPIC_PUBLISH, bufferData)) {
         inputString = "";
         stringComplete = false;
-         Serial.println("mensaje enviado");
       }
       init_flag = false;
     }
     
-    clientMQTT.loop();
+   clientMQTT.loop();
 }
 
 void receiveData() {
@@ -129,6 +137,13 @@ void receiveData() {
   while (Serial.available()) {
     // get the new byte:
     char inChar = (char)Serial.read();
+    if(inChar=='<'){
+      inputString = "<3";
+      inputString.toCharArray(bufferData, SIZE_BUFFER_DATA);
+      heartBeat =true;
+      
+    }
+    else if(inChar!='<'&& !inputString.equals("<3")){
     // add it to the inputString:
     inputString += inChar;
     // if the incoming character is a newline, set a flag
@@ -139,12 +154,12 @@ void receiveData() {
       
     }
   }
-}
+}}
 
 void loop() {
   
   
   receiveData();
   processData();
-  
+   
 }

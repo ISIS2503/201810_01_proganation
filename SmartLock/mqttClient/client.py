@@ -58,8 +58,8 @@ Connected = False   #global variable for the state of the connection
  
 broker_address= "192.168.0.17"  #Broker address
 port = 1883                         #Broker port
-user =   ""                  #Connection username
-password = ""           #Connection password
+user =   "notifier"                  #Connection username
+password = "yale"           #Connection password
  
 client = mqttClient.Client("Python")               #create new instance
 client.username_pw_set(user, password=password)    #set username and password
