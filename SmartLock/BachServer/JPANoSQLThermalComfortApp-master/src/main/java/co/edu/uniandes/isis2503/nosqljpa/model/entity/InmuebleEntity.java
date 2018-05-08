@@ -24,6 +24,7 @@
 package co.edu.uniandes.isis2503.nosqljpa.model.entity;
 
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.InmuebleDTO;
 
 import java.io.Serializable;
@@ -31,8 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -51,26 +51,27 @@ public class InmuebleEntity implements Serializable{
     
     private Boolean activo = true;
     
-  @OneToMany(mappedBy = "Alertas", cascade = CascadeType.PERSIST, orphanRemoval = true)
-  private List<AlertasEntity> Alertas;
+  @OneToMany(mappedBy = "Dispositivos", cascade = CascadeType.PERSIST, orphanRemoval = true)
+  private List<DispositivoEntity> dispositivos;
   
     @ManyToOne(cascade = CascadeType.PERSIST)
     private unidadRecidencialEntity unidad;
      
     public InmuebleEntity()
     {
-        Alertas = new ArrayList<>();
+        dispositivos = new ArrayList<>();
     }
        public InmuebleEntity(InmuebleDTO dto )
     {
         this.id = dto.getId();
-        List<AlertasDTO> al = dto.getAlertas();
+        // cambiar 
+        List<DispositivoDTO> al = dto.getDispositivo();
         ArrayList ar = new ArrayList();
         for(int i=0;i<al.size();i++)
         {
-            ar.add(al.get(i).toEntity(al.get(i)));
+            ar.add(al.get(i).DtoToEntity(al.get(i)));
         }
-        this.Alertas =  ar ;
+        this.dispositivos =  ar ;
     }
 
     public Long getId() {
@@ -89,13 +90,15 @@ public class InmuebleEntity implements Serializable{
         this.activo = activo;
     }
 
-    public List<AlertasEntity> getAlertas() {
-        return Alertas;
+    public List<DispositivoEntity> getDispositivos() {
+        return dispositivos;
     }
 
-    public void setAlertas(List<AlertasEntity> Alertas) {
-        this.Alertas = Alertas;
+    public void setDispositivos(List<DispositivoEntity> dispositivos) {
+        this.dispositivos = dispositivos;
     }
+
+
 
     public unidadRecidencialEntity getUnidad() {
         return unidad;

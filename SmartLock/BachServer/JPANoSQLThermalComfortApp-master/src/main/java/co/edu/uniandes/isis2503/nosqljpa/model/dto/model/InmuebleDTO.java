@@ -25,6 +25,7 @@ package co.edu.uniandes.isis2503.nosqljpa.model.dto.model;
 
 
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
+import co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,22 +40,23 @@ public class InmuebleDTO {
     
     private Boolean activo = true;
     
-    private List<AlertasDTO> alertas;
+    private List<DispositivoDTO> dispositivo;
     
     public InmuebleDTO()
     {
-        alertas = new ArrayList<>();
+        dispositivo = new ArrayList<>();
     }
+    
      public InmuebleDTO(InmuebleEntity entity)
     {
         this.id = entity.getId();
-        ArrayList<AlertasEntity> al = (ArrayList<AlertasEntity>) entity.getAlertas();
-        ArrayList<AlertasDTO> ar = new ArrayList<>();
+        ArrayList<DispositivoEntity> al = (ArrayList<DispositivoEntity>) entity.getDispositivos();
+        ArrayList<DispositivoDTO> ar = new ArrayList<>();
         for(int i=0;i<al.size();i++)
         {
-            ar.add(al.get(i).toDTO(al.get(i)));
+            ar.add(al.get(i).entityToDto(al.get(i)));
         }
-        this.alertas = ar;
+        this.dispositivo = ar;
         this.activo = entity.getActivo();
     }
      
@@ -70,15 +72,16 @@ public class InmuebleDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public List<DispositivoDTO> getDispositivo() {
+        return dispositivo;
+    }
+
+    public void setDispositivo(List<DispositivoDTO> dispositivo) {
+        this.dispositivo = dispositivo;
+    }
    
 
-    public List<AlertasDTO> getAlertas() {
-        return alertas;
-    }
-
-    public void setAlertas(List<AlertasDTO> alertas) {
-        this.alertas = alertas;
-    }
 
     public Boolean getActivo() {
         return activo;

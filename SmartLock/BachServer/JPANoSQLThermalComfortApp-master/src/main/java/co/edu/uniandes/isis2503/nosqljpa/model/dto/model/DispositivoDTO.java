@@ -23,46 +23,48 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.model.dto.model;
 
-import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
-import java.util.Date;
+import co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Id;
+
 
 /**
  *
  * @author js.palacios437
  */
-public class AlertasDTO {
+public class DispositivoDTO  {
     
+    @Id
     private Long id;
     
-  
+    private String tipo;
     
-    private String tipoDeAlarma;
-
-     private String timeStamp;
-
-    public String getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-     
-    public AlertasDTO()
+    private Boolean activa;
+    
+    private List<AlertasDTO> alertas;
+    
+    public DispositivoDTO()
     {
-        
+        alertas = new ArrayList<AlertasDTO>();
+        this.activa = false;
     }
-    public AlertasDTO(AlertasEntity entity)
+    public DispositivoDTO(DispositivoEntity entity)
     {
         this.id = entity.getId();
-        this.tipoDeAlarma = entity.getTipoDeAlarma();
-        this.timeStamp = entity.getTimeStamp();
-        
+        this.tipo = entity.getTipo();
+        this.activa = entity.getActiva();
+        this.alertas = new ArrayList<AlertasDTO>();
+        this.alertas = entity.alerToDto();
     }
-    
-    public AlertasEntity toEntity(AlertasDTO dto)
+
+    public DispositivoDTO entityToDto(DispositivoEntity entity)
     {
-        return new AlertasEntity(dto);
+        return new DispositivoDTO(entity);
+    }
+        public DispositivoEntity DtoToEntity(DispositivoDTO dto)
+    {
+        return new DispositivoEntity(dto);
     }
     public Long getId() {
         return id;
@@ -72,15 +74,29 @@ public class AlertasDTO {
         this.id = id;
     }
 
-
-
-    public String getTipoDeAlarma() {
-        return tipoDeAlarma;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTipoDeAlarma(String tipoDeAlarma) {
-        this.tipoDeAlarma = tipoDeAlarma;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
+    public Boolean getActiva() {
+        return activa;
+    }
+
+    public List<AlertasDTO> getAlertas() {
+        return alertas;
+    }
+
+    public void setAlertas(List<AlertasDTO> alertas) {
+        this.alertas = alertas;
+    }
+
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
+    }
+    
     
 }

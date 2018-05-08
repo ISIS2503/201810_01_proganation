@@ -23,10 +23,10 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.logic;
 
-import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.InmuebleDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.unidadRecidencialDTO;
-import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
+import co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity;
 import co.edu.uniandes.isis2503.nosqljpa.persistence.unidadRecidencialPersistance;
@@ -125,12 +125,11 @@ public class unidadRecidencialLogic {
               {
                   InmuebleEntity in = new InmuebleEntity(dto);
                   ArrayList<InmuebleEntity> ar =  (ArrayList)result.getCasas();
-                   System.out.println( ar.size()+" 01232132131212321321");
+          
                   ar.add(in);
-                  System.out.println( ar +" 012321321312321");
+             
                   result.setCasas(ar);
-                  System.out.println( ar.size()+" 012321321312321");
-                   System.out.println( result.getCasas() +" 012321321312321");
+              
                   persistance.update(result);
                   return dto;
               }
@@ -192,7 +191,7 @@ public class unidadRecidencialLogic {
            * @param id2
            * @return 
            */
-             public List<AlertasDTO> allAlertas(Long id ,Long id2)
+             public List<DispositivoDTO> allDispositivos(Long id ,Long id2)
           {
                 unidadRecidencialEntity result = persistance.find(id);
                 InmuebleEntity inmu = null;
@@ -216,18 +215,14 @@ public class unidadRecidencialLogic {
               if(inmu!=null)
               {
                   
-                  ArrayList<AlertasEntity> al = (ArrayList<AlertasEntity>) inmu.getAlertas();
-                  ArrayList<AlertasDTO> ar = new ArrayList<>();
-                             System.out.println( al.size() +" 1232131232131232123123564554645123123");
-                    System.out.println( al +" 234324");
-                           System.out.println( ar.size() +" 234234324");
-                    System.out.println( ar +" 23423");
+                  ArrayList<DispositivoEntity> al = (ArrayList<DispositivoEntity>) inmu.getDispositivos();
+                  ArrayList<DispositivoDTO> ar = new ArrayList<>();
                   for(int i =0;i<al.size();i++)
                   {
-                      AlertasEntity kk = al.get(i);
-                      ar.add(kk.toDTO(kk));
+                      DispositivoEntity kk = al.get(i);
+                      ar.add(kk.entityToDto(kk));
                   }
-                   System.out.println( ar +" 12321312321312321234324323123564554645123123");
+                 
                   return ar;
               }
               else
@@ -242,10 +237,10 @@ public class unidadRecidencialLogic {
               * @param id3
               * @return 
               */
-              public AlertasDTO findAlertas(Long id ,Long id2,Long id3)
+              public DispositivoDTO findDispositivo(Long id ,Long id2,Long id3)
           {
              unidadRecidencialEntity result = persistance.find(id);
-             AlertasEntity alert = new AlertasEntity();
+             DispositivoEntity alert = new DispositivoEntity();
                 InmuebleEntity inmu = null;
                if(result != null)
               {
@@ -268,13 +263,12 @@ public class unidadRecidencialLogic {
               {
                   Boolean encontro = false;
                
-                  ArrayList<AlertasEntity> al = (ArrayList<AlertasEntity>) inmu.getAlertas();
-                   System.out.println( al.size() +" 1232131232131232123123564554645123123");
-                    System.out.println( al +" 1232131232131232123123564554645123123");
+                  ArrayList<DispositivoEntity> al = (ArrayList<DispositivoEntity>) inmu.getDispositivos();
+         
                   for(int i =0;i<al.size();i++)
                   {
                        
-                      AlertasEntity kk = al.get(i);
+                      DispositivoEntity kk = al.get(i);
            
                       if(kk.getId()==id3)
                       {
@@ -283,7 +277,7 @@ public class unidadRecidencialLogic {
                           encontro =true;
                       }
                   }
-                  return alert.toDTO(alert);
+                  return alert.entityToDto(alert);
               }
               else
               {
@@ -297,7 +291,7 @@ public class unidadRecidencialLogic {
            * @param dto la alerta
            * @return la lareta agregada
            */
-          public AlertasDTO addAlerta(Long id,Long id2,AlertasDTO dto)
+          public DispositivoDTO addDispositivo(Long id,Long id2,DispositivoDTO dto)
           {
                 unidadRecidencialEntity result = persistance.find(id);
                 Boolean buscar = false;
@@ -305,6 +299,9 @@ public class unidadRecidencialLogic {
                    InmuebleDTO inmueble =  findIn(id,id2);
               if(result != null)
               {
+                  if(!result.getActivo())
+                      return null;
+                  
                   InmuebleEntity entity= null;
                   ArrayList<InmuebleEntity> list = (ArrayList<InmuebleEntity>) result.getCasas();
                   for(int i =0;i<list.size()&& !buscar;i++)
@@ -320,11 +317,13 @@ public class unidadRecidencialLogic {
                    
                   if(entity != null)
                   {
-                      ArrayList<AlertasEntity> ar = (ArrayList<AlertasEntity>) entity.getAlertas();
-                      
-                      ar.add(dto.toEntity(dto));
+                     if(!entity.getActivo())
+                      return null;
+                     
+                      ArrayList<DispositivoEntity> ar = (ArrayList<DispositivoEntity>) entity.getDispositivos();
+                      ar.add(dto.DtoToEntity(dto));
    
-                      entity.setAlertas(ar);
+                      entity.setDispositivos(ar);
                       list.set(cont,entity);
                       result.setCasas(list);
                      persistance.update(result);    
@@ -339,6 +338,9 @@ public class unidadRecidencialLogic {
                    
           }
           
+  
+         
+         
        public List<InmuebleDTO> allIn(Long id)
        {
              unidadRecidencialEntity result = persistance.find(id);
@@ -358,4 +360,78 @@ public class unidadRecidencialLogic {
                  return null;
              }
        }
+       
+       
+         public unidadRecidencialDTO desabilitarUnidad(Long id)
+          {
+              boolean encontro = false;
+              unidadRecidencialEntity result = persistance.find(id);
+              if(result!=null)
+              {
+                 result.setActivo(false);
+                 persistance.update(result);
+                 return result.entitytoDTO(result);
+              }
+              else
+              {
+                  return null;
+              }
+          }
+         
+            public DispositivoDTO desabilitarDispositivo(Long id,Long id2,Long id3)
+          {
+              boolean encontro = false;
+              unidadRecidencialEntity result = persistance.find(id);
+              InmuebleEntity inmu = null;
+              DispositivoEntity dis = null;
+              int con =0;
+              ArrayList<InmuebleEntity> al = new ArrayList<InmuebleEntity>();
+              if(result!=null)
+              {
+                  InmuebleEntity in=new InmuebleEntity();
+                  al = (ArrayList<InmuebleEntity>) result.getCasas();
+                  for(int i =0;i<al.size()&& !encontro;i++)
+                  {
+                      in = al.get(i);
+                      if(in.getId()==id2)
+                      {
+                          inmu = in;
+                          con = i;
+                          encontro = true;
+                      }
+                  }
+                  
+                   if(inmu!=null)
+                   {
+                       encontro = false;
+                       
+                       ArrayList<DispositivoEntity> disl = (ArrayList<DispositivoEntity>)inmu.getDispositivos();
+                      for(int i =0;i<disl.size()&& !encontro;i++)
+                       {  
+                           dis = disl.get(i);
+                           if(dis.getId()==id3)
+                           {
+                               dis.setActiva(false);
+                               disl.set(i,dis);
+                               inmu.setDispositivos(disl);
+                               encontro= true;
+                               
+                           }
+                       }
+                   }
+                  al.set(con, inmu);
+                  result.setCasas(al);
+                  persistance.update(result);
+                  return dis.entityToDto(dis);
+                 
+              }
+              else
+              {
+                  return null;
+              }
+          }
+      public DispositivoDTO silenciar(Long id,Long id2,Long id3)
+      {
+          return null;
+      }
 }

@@ -22,63 +22,58 @@
  * THE SOFTWARE.
  */
 package co.edu.uniandes.isis2503.nosqljpa.model.entity;
-
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
  * @author js.palacios437
  */
+
 @Entity
-@Table(name = "Alertas")
-public class AlertasEntity implements Serializable {
+@Table(name = "Dispositivos")
+public class DispositivoEntity implements Serializable{
     
     @Id
     private Long id;
     
-    private String tipoDeAlarma;
+    private String tipo;
     
-    private String timeStamp;
-      
+    private Boolean activa;
+    
+    @OneToMany(mappedBy = "Alertas", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<AlertasEntity> Alertas;
     
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private DispositivoEntity Dispositivo;
-      
-      
-      public AlertasEntity()
-      {
-      
-      }
-            public AlertasEntity(AlertasDTO dto)
-      {
-          this.id = dto.getId();
-          this.tipoDeAlarma = dto.getTipoDeAlarma();
-          this.timeStamp = dto.getTimeStamp();
-      }
-      /**
-       * convierte un dto a entity
-       * @param dto
-       * @return 
-       */
-      public AlertasEntity DTOtoEntity(AlertasDTO dto)
-      {
-          return new AlertasEntity(dto);
-      }
-      
-      public AlertasDTO toDTO(AlertasEntity entity)
-      {
-          return new AlertasDTO(entity);
-      }
-
+    private InmuebleEntity inmueble;
+    
+    public DispositivoEntity()
+    {
+        Alertas = new ArrayList<>();
+    }
+    
+   
+    public DispositivoEntity(DispositivoDTO dto)
+    {
+        this.id = dto.getId();
+        this.tipo = dto.getTipo();
+        this.activa = dto.getActiva();
+         Alertas = new ArrayList<>();
+       // this.Alertas = dto.getAlertas();
+    }
+    public DispositivoDTO entityToDto(DispositivoEntity entity)
+    {
+        return new DispositivoDTO(entity);
+    }
     public Long getId() {
         return id;
     }
@@ -87,31 +82,48 @@ public class AlertasEntity implements Serializable {
         this.id = id;
     }
 
-
-
-    public String getTipoDeAlarma() {
-        return tipoDeAlarma;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTipoDeAlarma(String tipoDeAlarma) {
-        this.tipoDeAlarma = tipoDeAlarma;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public DispositivoEntity getDispositivo() {
-        return Dispositivo;
+    public Boolean getActiva() {
+        return activa;
     }
 
-    public void setDispositivo(DispositivoEntity Dispositivo) {
-        this.Dispositivo = Dispositivo;
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
     }
 
+    public InmuebleEntity getInmueble() {
+        return inmueble;
+    }
+
+    public void setInmueble(InmuebleEntity inmueble) {
+        this.inmueble = inmueble;
+    }
+
+ 
+
+    public List<AlertasEntity> getAlertas() {
+        return Alertas;
+    }
+
+    public void setAlertas(List<AlertasEntity> Alertas) {
+        this.Alertas = Alertas;
+    }
     
-    public String getTimeStamp() {
-        return timeStamp;
+    public List<AlertasDTO> alerToDto()
+    {
+        ArrayList<AlertasDTO> res = new ArrayList<AlertasDTO>();
+        for(int i=0;i<this.Alertas.size();i++)
+        {
+            AlertasEntity aa = Alertas.get(i);
+            res.add(aa.toDTO(aa));
+        }
+        return res;
     }
-
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-    
 }

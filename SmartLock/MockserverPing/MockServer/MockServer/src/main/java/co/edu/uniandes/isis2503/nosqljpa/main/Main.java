@@ -23,7 +23,11 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.main;
 
-import co.edu.uniandes.isis2503.nosqljpa.service.Conection;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.eclipse.jetty.server.Server;
@@ -35,33 +39,64 @@ import org.eclipse.jetty.webapp.WebAppContext;
  */
 public class Main {
     private static final Logger LOG = Logger.getLogger(Main.class.getName());
-
+    private static float tiempodeping = 500;
+    private static int cont =0;
     public static void main(String agrs[]) {
         try {
-          System.out.println("pre con");
-            
-            // new Conection().connect();
-             System.out.println("pos con");
-            String webappDirLocation = "src/main/webapp/";
-            String webPort = System.getenv("PORT");
-            if (webPort == null || webPort.isEmpty()) {
-                webPort = "8080";
-            }
-            Server server = new Server(Integer.valueOf(webPort));
-            WebAppContext root = new WebAppContext();
-            root.setContextPath("/");
-            root.setDescriptor(webappDirLocation + "/WEB-INF/web.xml");
-            root.setResourceBase(webappDirLocation);
-            root.setParentLoaderPriority(true);
-            server.setHandler(root);
-            server.start();
-            server.join();
-            
-        } catch (InterruptedException ex) {
-            LOG.log(Level.WARNING, ex.getMessage());
+         Long startime = System.currentTimeMillis();
+        while(true)
+        {  
+          if((System.currentTimeMillis()-startime)>tiempodeping)
+          {
+               getStatus("http://172.24.42.60:8080/UnidadResidencial/hb"); 
+               startime = System.currentTimeMillis();
+          }
+         
+        }
+
+   
         } catch (Exception ex) {
             LOG.log(Level.WARNING, ex.getMessage());
         }
 
+    }
+  public static String getStatus(String url) throws IOException {  
+        String result = "";
+        try {
+            URL siteURL = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) siteURL
+                    .openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect();
+         
+            int code = connection.getResponseCode();
+              
+            if (code == 200) {
+                result = "Green";
+                if(cont!=0)
+                    cont =0;
+                System.out.println("System Ok");
+            }
+            else
+            {
+                System.out.println("Error en el sistema");
+            }
+           
+        } catch (Exception e) {
+            result = "->Red<-";
+            cont++;
+             
+             if(cont>5)
+             {
+                  System.out.println("Fuera de linea");
+             }
+             else
+             {
+               System.out.println("perdida de HeartBeat");  
+             }
+        }
+        return result;
+             
+ 
     }
 }

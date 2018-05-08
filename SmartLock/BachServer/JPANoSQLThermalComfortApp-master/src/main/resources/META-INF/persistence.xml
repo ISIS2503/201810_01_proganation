@@ -5,6 +5,7 @@
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity</class>
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity</class>
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity</class>
+    <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.connection.autocommit" value="true"/>
@@ -22,6 +23,7 @@
       <property name="hibernate.c3p0.timeout" value="300"/>
       <property name="hibernate.c3p0.max_statements" value="50"/>
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="cassandra_db" transaction-type="RESOURCE_LOCAL">
@@ -29,6 +31,7 @@
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity</class>
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.InmuebleEntity</class>
     <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity</class>
+    <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.DispositivoEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="kundera.nodes" value="172.24.42.60"/>

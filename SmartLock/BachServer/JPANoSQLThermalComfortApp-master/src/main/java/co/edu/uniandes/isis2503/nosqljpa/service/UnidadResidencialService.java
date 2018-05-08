@@ -25,13 +25,15 @@ package co.edu.uniandes.isis2503.nosqljpa.service;
 
 
 import co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthorizationFilter.Role;
-import co.edu.uniandes.isis2503.nosqljpa.authentificacion.Secured;
+import co.edu.uniandes.isis2503.nosqljpa.authentificacion.*;
+import static co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthenticationFilter.AUTHENTICATION_SCHEME;
 import co.edu.uniandes.isis2503.nosqljpa.logic.unidadRecidencialLogic;
-import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
+
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.DispositivoDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.InmuebleDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.unidadRecidencialDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.unidadRecidencialEntity;
-import java.util.ArrayList;
+
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -40,7 +42,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.HttpHeaders;
+
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 
 /**
@@ -48,7 +56,8 @@ import javax.ws.rs.core.MediaType;
  * @author js.palacios437
  */
 @Path("/UnidadResidencial")
-@Secured
+//@Secured
+ @Secured({Role.user})
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UnidadResidencialService {
@@ -68,12 +77,25 @@ private final unidadRecidencialLogic logica;
      */
    @GET
    @Secured({Role.Yale})
-   public List<unidadRecidencialDTO> all() {
+   public List<unidadRecidencialDTO> all(@HeaderParam("Role") String rol) {
+       if(!rol.equalsIgnoreCase("Yale"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
      List<unidadRecidencialEntity> lo = logica.all();
-      System.out.println(lo +"12412412");
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return uu.listToEntity(lo);
     }
+   
+     @GET
+    @Path("/hb")
+   public int hb() {
+   
+       return 200;
+    }
+   
     /**
      * metodo que regresa una unidad en particular url: http://172.24.42.60:8080/UnidadResidencial/1
      * @param id de la unidad
@@ -82,13 +104,31 @@ private final unidadRecidencialLogic logica;
     @GET
     @Secured({Role.Secure})
     @Path("/{id}")
-    public unidadRecidencialDTO find(@PathParam("id") Long id) {
+    public unidadRecidencialDTO find(@PathParam("id") Long id,@HeaderParam("Role") String rol) {
+        if(!rol.equalsIgnoreCase("Secure"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
         return logica.find(id);
     }
+    
+    /**
+     * regresa todos los inmuebles de una unidad residencial
+     * @param id
+     * @return 
+     */
     @GET
     @Secured({Role.admin})
    @Path("{id}/Inmueble")
-   public List<InmuebleDTO> allInmueble(@PathParam("id") Long id) {
+   public List<InmuebleDTO> allInmueble(@PathParam("id") Long id,@HeaderParam("Role") String rol) {
+       if(!rol.equalsIgnoreCase("admin"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
       return logica.allIn(id);
    }
    /**
@@ -100,7 +140,13 @@ private final unidadRecidencialLogic logica;
    @GET
    @Secured({Role.user})
    @Path("{id}/Inmueble/{id2}")
-   public InmuebleDTO findInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2) {
+   public InmuebleDTO findInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2,@HeaderParam("Role") String rol) {
+       if(!rol.equalsIgnoreCase("user"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
       return logica.findIn(id,id2);
    }
    /**
@@ -111,9 +157,15 @@ private final unidadRecidencialLogic logica;
     */
    @GET
    @Secured({Role.user})
-   @Path("{id}/Inmueble/{id2}/Alertas")
-   public List<AlertasDTO> allAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2) {
-     List<AlertasDTO> lista = logica.allAlertas(id, id2);
+   @Path("{id}/Inmueble/{id2}/Dispositivos")
+   public List<DispositivoDTO> allDispositivos(@PathParam("id") Long id,@PathParam("id2") Long id2,@HeaderParam("Role") String rol) {
+       if(!rol.equalsIgnoreCase("user"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
+     List<DispositivoDTO> lista = logica.allDispositivos(id, id2);
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return  lista;
     }
@@ -124,24 +176,33 @@ private final unidadRecidencialLogic logica;
     * @param id3
     * @return 
     */
-    @GET
-   @Path("{id}/Inmueble/{id2}/Alertas/{id3}")
-   public AlertasDTO findAlertas(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3) {
-          return logica.findAlertas(id, id2, id3);
+   @GET
+   @Path("{id}/Inmueble/{id2}/Dispositivo/{id3}")
+   public DispositivoDTO findDispositivos(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3) {
+          return logica.findDispositivo(id, id2, id3);
     }
-
+    
+//   @GET
+//   @Path("{id}/Inmueble/{id2}/beforeToDay")
+//   public List<AlertasDTO> findAlertasBeforeInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2) {
+//       
+//       
+//         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); 
+//         Date td = new Date();
+//         String date = df.format(td);
+//        return logica.AlertasBefore(id, id2, date);
+//      
+//    }
     /**
      * crea una nueva unidada residencial url: http://172.24.42.60:8080/UnidadResidencial/
      * @param dto de la nueva unidad
      * @return la unidad creada
      */
-    @POST
-    public unidadRecidencialDTO creat(unidadRecidencialDTO dto)
-    {
-       
-        return logica.add(dto);
-        
-    }
+   @POST
+   public unidadRecidencialDTO creat(unidadRecidencialDTO dto)
+   {     
+       return logica.add(dto);      
+   }
    
     /**
      * metodo que crea y agrega un inmueble a la unidad residencial  url http://172.24.42.60:8080/UnidadResidencial/1/Inmueble/
@@ -165,9 +226,9 @@ private final unidadRecidencialLogic logica;
      */
     @POST
     @Path("{id}/Inmueble/{id2}")
-    public AlertasDTO creatAlerta(@PathParam("id") Long id,@PathParam("id2") Long id2,AlertasDTO dto)
+    public DispositivoDTO creatDispositivo(@PathParam("id") Long id,@PathParam("id2") Long id2,DispositivoDTO dto)
     {
-        return logica.addAlerta(id,id2,dto);
+        return logica.addDispositivo(id,id2,dto);
     }
     
     /**
@@ -182,13 +243,26 @@ private final unidadRecidencialLogic logica;
     {
         return logica.desabilitar(id);
     }
-    
-   @DELETE
-   @Path("{id}/Inmueble/{id2}")
-   public InmuebleDTO desactibarInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2)
+    @DELETE
+  @Path("{id}/Inmueble/{id2}")
+   public InmuebleDTO desactivarInmueble(@PathParam("id") Long id,@PathParam("id2") Long id2)
     {
         return logica.desabilitarInmueble(id,id2);
-    }
+  }
+
+   @DELETE
+  @Path("{id}/Inmueble/{id2}/Dispositivo/{id3}")
+  public DispositivoDTO desactivarDispositivo(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3)
+   {
+        return logica.desabilitarDispositivo(id,id2,id3);
+   }
+
     
+    @GET
+    @Path("{id}/Inmueble/{id2}/Dispositivo/{id3}/silenciar")
+    public DispositivoDTO creatDispositivo(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3)
+    {
+        return logica.silenciar(id,id2,id3);
+    }
     
 }
