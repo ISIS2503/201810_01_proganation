@@ -1,8 +1,10 @@
 <div>
-    <h2 class="form-title">List of all competitors</h2>
+
+
+    <h2 class="form-title">Lista de alarmas</h2>
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">Competitors</div>
+        <div class="panel-heading">Alarmas</div>
         <!-- Table -->
         <table ng-if="totalR.length" datatable-setup class="table table-bordered table-striped">
             <thead>
@@ -22,6 +24,31 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    
+    <h2 class="form-title">Lista de fallos</h2>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Fallos</div>
+        <!-- Table -->
+        <table ng-if="totalFallos.length" datatable-setup class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-repeat="dispositivo in totalFallos | orderBy: 'id'">
+                    <td>{{dispositivo.id}}</td>
+                    <td>{{dispositivo.tipo}}</td>
+                    <td>{{dispositivo.activa?"activo":"cerradura fuera de linea"}}</td>             
+                </tr>
+            </tbody>
+        </table>
  
     </div>
 </div>
+

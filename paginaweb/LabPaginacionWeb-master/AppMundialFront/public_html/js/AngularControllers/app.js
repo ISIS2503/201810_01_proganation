@@ -37,13 +37,19 @@
             controller: ['$http', '$scope', function ($http, $scope) {
                     var self = this;
                     self.competitors = [];
+                    self.fallos = [];
                     $scope.api = function () {
                         var callApi = $http.get('http://172.24.42.60:8080/Alertas/UnidadResidencial/100').success(function (data) {
-                            console.log(data);
                             self.competitors = data;
                         });
-                    }
+                    };
                     $scope.api();
+                    $scope.fallos = function() {
+                        var darFallos = $http.get('http://172.24.42.60:8080/UnidadResidencial/100/Inmueble/1/Dispositivos').success(function (data) {
+                            self.fallos = data;
+                        });
+                    };
+                    $scope.fallos();
                 }],
             controllerAs: 'CompetitorsListCtrl'
         };
@@ -55,10 +61,17 @@ aplicacionMundial.controller('MyCtrl', ['$scope', '$http',
                     
                     $scope.competitors = data;                   
                 });
+                var darFallos = $http.get('http://172.24.42.60:8080/UnidadResidencial/100/Inmueble/1/Dispositivos').success(function (data) {
+                            $scope.fallos = data;
+                        });
+                darFallos.then(function (){
+                    $scope.totalFallos = $scope.fallos;
+                    console.log($scope.totalFallos);
+                });
                 callApi.then(function () {
                     $scope.totalR = $scope.competitors;
                     console.log($scope.totalR);
-                });   
+                });
         }
     ]);
     aplicacionMundial.directive('datatableSetup', ['$timeout',
