@@ -41,17 +41,18 @@ public class DispositivoDTO  {
     private String tipo;
     
     private Boolean activa;
+   
     
     private List<AlertasDTO> alertas;
     
     public DispositivoDTO()
     {
-        alertas = new ArrayList<AlertasDTO>();
-        this.activa = false;
     }
     public DispositivoDTO(DispositivoEntity entity)
     {
         this.id = entity.getId();
+        alertas = new ArrayList<AlertasDTO>();
+        this.activa = false;
         this.tipo = entity.getTipo();
         this.activa = entity.getActiva();
         this.alertas = new ArrayList<AlertasDTO>();

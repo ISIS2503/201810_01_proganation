@@ -76,7 +76,7 @@ public class AlertasLogic {
                     
                             DispositivoEntity kk = al.get(j);  
                           dd.addAll(kk.alerToDto()); 
-                               System.out.println(dd + "fdsfdsfdsfdsfdsfdsfdsfdsfds");
+                              
                          }
                   
                 
@@ -136,6 +136,20 @@ public class AlertasLogic {
               }
      }
        
+     public List<AlertasDTO> getAllInmuebleActivos(Long id,Long id2)
+     {
+         ArrayList<AlertasDTO> res = new ArrayList<AlertasDTO>();
+         ArrayList<AlertasDTO> con =(ArrayList<AlertasDTO>) getAllInmueble(id,id2);
+         for(int i = 0;i<con.size();i++)
+         {
+             AlertasDTO al = con.get(i);
+             if(al.getActiva())
+                 res.add(al);
+         }
+         
+         return res;
+     }
+
      public List<AlertasDTO> getDispositivo(Long id,Long id2,Long id3)
      {
         unidadRecidencialEntity result = persistance.find(id);
@@ -408,5 +422,53 @@ public class AlertasLogic {
                   return null;
               }
          
+     }
+     public AlertasDTO turnOff(Long id,Long id2)
+     {
+       boolean encontro = false;
+       unidadRecidencialEntity result = persistance.find(id);      
+          ArrayList<AlertasEntity> dd = new ArrayList<AlertasEntity>() ;
+          
+          AlertasDTO resp = null;
+            if(result != null)
+              {
+                 ArrayList<InmuebleEntity> list = (ArrayList<InmuebleEntity>) result.getCasas();
+                  for( int i=0 ;i<list.size() && !encontro;i++)
+                  {
+                      InmuebleEntity in = list.get(i);
+                     ArrayList<DispositivoEntity>  al = (ArrayList<DispositivoEntity>) in.getDispositivos();       
+                       for(int j =0;j<al.size() && !encontro;j++)
+                       {                     
+                          
+                             DispositivoEntity di = al.get(i);
+                             dd = (ArrayList<AlertasEntity>)di.getAlertas();
+                              for(int k =0;k<dd.size() && !encontro;k++)
+                              {
+                                  AlertasEntity tt = dd.get(i);
+                                  if(tt.getId() == id2)
+                                  {                          
+                                      tt.setActiva(false);
+                                      resp = tt.toDTO(tt);
+                                      dd.set(k, tt);
+                                      //encontro=true;
+                                  }
+                              }
+                              di.setAlertas(dd);
+                              al.set(j, di);
+                            
+                         }
+                    in.setDispositivos(al);
+                    list.set(i, in);
+                    result.setCasas(list);
+                   
+                  }
+                  persistance.update(result);
+                  return resp;
+              }
+         
+              else
+              {
+                  return null;
+              }
      }
 }

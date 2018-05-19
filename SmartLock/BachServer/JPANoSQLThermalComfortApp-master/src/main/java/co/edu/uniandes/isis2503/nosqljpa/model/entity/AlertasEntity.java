@@ -48,7 +48,23 @@ public class AlertasEntity implements Serializable {
     private String tipoDeAlarma;
     
     private String timeStamp;
-      
+
+     private Boolean Activa;
+     
+    private String nombrePropietario;
+    
+    private String numeroDeContacto;
+    
+    private String correo; 
+     
+    public Boolean getActiva() {
+        return Activa;
+    }
+
+    public void setActiva(Boolean Activa) {
+        this.Activa = Activa;
+    }
+    
     
     @ManyToOne(cascade = CascadeType.PERSIST)
     private DispositivoEntity Dispositivo;
@@ -63,6 +79,7 @@ public class AlertasEntity implements Serializable {
           this.id = dto.getId();
           this.tipoDeAlarma = dto.getTipoDeAlarma();
           this.timeStamp = dto.getTimeStamp();
+          this.Activa = dto.getActiva();
       }
       /**
        * convierte un dto a entity
@@ -112,6 +129,30 @@ public class AlertasEntity implements Serializable {
 
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getNombrePropietario() {
+        return nombrePropietario;
+    }
+
+    public void setNombrePropietario(String nombrePropietario) {
+        this.nombrePropietario = nombrePropietario;
+    }
+
+    public String getNumeroDeContacto() {
+        return numeroDeContacto;
+    }
+
+    public void setNumeroDeContacto(String numeroDeContacto) {
+        this.numeroDeContacto = numeroDeContacto;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
     
 }

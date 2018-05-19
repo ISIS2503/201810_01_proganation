@@ -158,13 +158,8 @@ private final unidadRecidencialLogic logica;
    @GET
    @Secured({Role.user})
    @Path("{id}/Inmueble/{id2}/Dispositivos")
-   public List<DispositivoDTO> allDispositivos(@PathParam("id") Long id,@PathParam("id2") Long id2,@HeaderParam("Role") String rol) {
-       if(!rol.equalsIgnoreCase("user"))
-       {
-           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
-                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
-                .build());
-       }
+   public List<DispositivoDTO> allDispositivos(@PathParam("id") Long id,@PathParam("id2") Long id2) {
+  
      List<DispositivoDTO> lista = logica.allDispositivos(id, id2);
      unidadRecidencialEntity uu = new unidadRecidencialEntity();
      return  lista;

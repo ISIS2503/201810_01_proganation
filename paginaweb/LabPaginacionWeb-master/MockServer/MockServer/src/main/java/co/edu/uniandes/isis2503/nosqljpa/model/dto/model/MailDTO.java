@@ -23,72 +23,53 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.model.dto.model;
 
-import co.edu.uniandes.isis2503.nosqljpa.model.entity.AlertasEntity;
-import java.util.Date;
-
 /**
  *
- * @author js.palacios437
+ * @author ia.salazar
  */
-public class AlertasDTO {
+
+
+
+import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
+public class MailDTO {
     
-    private Long id;
+    private String remitente;
+    private List<String> correos;
+    private String asunto;
+    private String body;
     
-    private Boolean Activa;
-
-    public Boolean getActiva() {
-        return Activa;
-    }
-
-    public void setActiva(Boolean Activa) {
-        this.Activa = Activa;
-    }
     
-    private String tipoDeAlarma;
-
-     private String timeStamp;
-
-    public String getTimeStamp() {
-        return timeStamp;
+    public String getBody() {
+        return body;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-     
-    public AlertasDTO()
-    {
-        this.Activa = true;
-    }
-    public AlertasDTO(AlertasEntity entity)
-    {
-        this.id = entity.getId();
-        this.tipoDeAlarma = entity.getTipoDeAlarma();
-        this.timeStamp = entity.getTimeStamp();
-        this.Activa = entity.getActiva();
+    public void setBody(String mensaje) {
+        this.body = mensaje;
     }
     
-    public AlertasEntity toEntity(AlertasDTO dto)
-    {
-        return new AlertasEntity(dto);
-    }
-    public Long getId() {
-        return id;
+    public String getRemitente() {
+        return remitente;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRemitente(String r) {
+        this.remitente = r;
     }
-
-
-
-    public String getTipoDeAlarma() {
-        return tipoDeAlarma;
-    }
-
-    public void setTipoDeAlarma(String tipoDeAlarma) {
-        this.tipoDeAlarma = tipoDeAlarma;
-    }
-
     
+     public String getAsunto() {
+        return asunto;
+    }
+
+    public void setAsunto(String a) {
+        this.asunto = a;
+    }
+    
+     public List<String> getCorreos() {
+        return correos;
+    }
+
+    public void setCorreos(List<String> correos) {
+        this.correos = correos;
+    }
 }

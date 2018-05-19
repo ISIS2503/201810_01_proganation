@@ -1,0 +1,27 @@
+<div>
+    <h2 class="form-title">List of all competitors</h2>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Competitors</div>
+        <!-- Table -->
+        <table ng-if="totalR.length" datatable-setup class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>TipoAlarma</th>
+                    <th>TimeStamp</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-repeat="competitor in totalR | orderBy: 'id'">
+                    <td>{{competitor.id}}</td>
+                    <td>{{competitor.tipoDeAlarma}}</td>
+                    <td>{{competitor.timeStamp}}</td>             
+                </tr>
+            </tbody>
+        </table>
+ 
+    </div>
+</div>

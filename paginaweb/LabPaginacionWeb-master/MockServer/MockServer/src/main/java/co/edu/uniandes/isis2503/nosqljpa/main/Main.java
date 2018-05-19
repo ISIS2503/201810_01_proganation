@@ -23,7 +23,6 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.main;
 
-import co.edu.uniandes.isis2503.nosqljpa.service.Conection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.eclipse.jetty.server.Server;
@@ -38,10 +37,6 @@ public class Main {
 
     public static void main(String agrs[]) {
         try {
-          System.out.println("pre con");
-            
-            new Conection().connect();
-             System.out.println("pos con");
             String webappDirLocation = "src/main/webapp/";
             String webPort = System.getenv("PORT");
             if (webPort == null || webPort.isEmpty()) {
@@ -56,7 +51,6 @@ public class Main {
             server.setHandler(root);
             server.start();
             server.join();
-            
         } catch (InterruptedException ex) {
             LOG.log(Level.WARNING, ex.getMessage());
         } catch (Exception ex) {

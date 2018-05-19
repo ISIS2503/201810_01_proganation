@@ -51,6 +51,12 @@ public class InmuebleEntity implements Serializable{
     
     private Boolean activo = true;
     
+    private String nombrePropietario;
+    
+    private String numeroDeContacto;
+    
+    private String correo; 
+    
   @OneToMany(mappedBy = "Dispositivos", cascade = CascadeType.PERSIST, orphanRemoval = true)
   private List<DispositivoEntity> dispositivos;
   
@@ -72,6 +78,9 @@ public class InmuebleEntity implements Serializable{
             ar.add(al.get(i).DtoToEntity(al.get(i)));
         }
         this.dispositivos =  ar ;
+        this.nombrePropietario = dto.getNombrePropietario();
+        this.numeroDeContacto = dto.getNumeroDeContacto();
+        this.correo = dto.getCorreo();
     }
 
     public Long getId() {
@@ -130,6 +139,30 @@ public class InmuebleEntity implements Serializable{
             dtos.add(entity.entityToDTO(entity));
         }
         return dtos;
+    }
+
+    public String getNombrePropietario() {
+        return nombrePropietario;
+    }
+
+    public void setNombrePropietario(String nombrePropietario) {
+        this.nombrePropietario = nombrePropietario;
+    }
+
+    public String getNumeroDeContacto() {
+        return numeroDeContacto;
+    }
+
+    public void setNumeroDeContacto(String numeroDeContacto) {
+        this.numeroDeContacto = numeroDeContacto;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
     
 }

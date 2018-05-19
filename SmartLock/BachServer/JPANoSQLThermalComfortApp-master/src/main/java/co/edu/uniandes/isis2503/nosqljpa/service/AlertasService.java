@@ -23,6 +23,7 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.service;
 
+import static co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthenticationFilter.AUTHENTICATION_SCHEME;
 import co.edu.uniandes.isis2503.nosqljpa.authentificacion.AuthorizationFilter;
 import co.edu.uniandes.isis2503.nosqljpa.authentificacion.Secured;
 import co.edu.uniandes.isis2503.nosqljpa.logic.AlertasLogic;
@@ -30,12 +31,17 @@ import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.AlertasDTO;
 import co.edu.uniandes.isis2503.nosqljpa.persistence.unidadRecidencialPersistance;
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -43,7 +49,7 @@ import javax.ws.rs.core.MediaType;
  */
 
 @Path("/Alertas")
-//@Secured @Secured({AuthorizationFilter.Role.user})
+@Secured({AuthorizationFilter.Role.Secure})
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AlertasService {
@@ -60,8 +66,14 @@ public class AlertasService {
      */
     @GET
     @Path("/UnidadResidencial")
-    public List<AlertasDTO> getAll()
+    public List<AlertasDTO> getAll(@HeaderParam("Role") String rol)
     {
+        if(!rol.equalsIgnoreCase("Yale"))
+       {
+           throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE, AUTHENTICATION_SCHEME)
+                .build());
+       }
         return logica.getAll();
     }
     
@@ -87,6 +99,19 @@ public class AlertasService {
     public List<AlertasDTO> getAllInmuebles(@PathParam("id") Long id,@PathParam("id2") Long id2)
     {
        return logica.getAllInmueble(id,id2);
+    }
+    /**
+     * metodo que regras las activas
+     * 
+     * @param id
+     * @param id2
+     * @return 
+     */
+    @GET
+    @Path("/UnidadResidencial/{id}/Inmueble/{id2}/Activas")
+    public List<AlertasDTO> getAllInmueblesActivos(@PathParam("id") Long id,@PathParam("id2") Long id2)
+    {
+       return logica.getAllInmuebleActivos(id,id2);
     }
     /**
      * devuelve todas las alarmas de un dispositivo
@@ -127,5 +152,12 @@ public class AlertasService {
     public AlertasDTO createAlarma(@PathParam("id") Long id,@PathParam("id2") Long id2,@PathParam("id3") Long id3,AlertasDTO dto)
     {
         return logica.createAlarma(id,id2,id3,dto);
+    }
+    
+    @DELETE
+      @Path("/UnidadResidencial/{id1}/Alarma/{id2}")
+    public AlertasDTO AlarmTurnOff(@PathParam("id1") Long id,@PathParam("id2") Long id2)
+    {
+        return logica.turnOff(id,id2);
     }
 }

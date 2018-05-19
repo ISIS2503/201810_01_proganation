@@ -42,6 +42,13 @@ public class InmuebleDTO {
     
     private List<DispositivoDTO> dispositivo;
     
+    private String nombrePropietario;
+    
+    private String numeroDeContacto;
+    
+    private String correo;
+    
+    
     public InmuebleDTO()
     {
         dispositivo = new ArrayList<>();
@@ -58,6 +65,9 @@ public class InmuebleDTO {
         }
         this.dispositivo = ar;
         this.activo = entity.getActivo();
+        this.nombrePropietario = entity.getNombrePropietario();
+        this.numeroDeContacto = entity.getNumeroDeContacto();
+        this.correo = entity.getCorreo();
     }
      
      public InmuebleEntity toEntity(InmuebleDTO dto)
@@ -89,6 +99,30 @@ public class InmuebleDTO {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public String getNombrePropietario() {
+        return nombrePropietario;
+    }
+
+    public void setNombrePropietario(String nombrePropietario) {
+        this.nombrePropietario = nombrePropietario;
+    }
+
+    public String getNumeroDeContacto() {
+        return numeroDeContacto;
+    }
+
+    public void setNumeroDeContacto(String numeroDeContacto) {
+        this.numeroDeContacto = numeroDeContacto;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
     
 }

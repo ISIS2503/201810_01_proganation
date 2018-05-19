@@ -52,11 +52,12 @@ public void connect() {
     try {
        
         System.out.println("holaaaa");
-        client = new MqttClient("tcp://172.24.42.64:1883", "Sending");
+        client = new MqttClient("tcp://172.24.42.97:8083", "Sending");
         System.out.println("hola");
         client.connect();
         client.setCallback(this);
-        client.subscribe("lock/casa/puerta2");
+         client.subscribe("lock/casa/puerta2");
+        client.subscribe("Casa/lock/heartbeat");
          System.out.println("hola2");
         MqttMessage message = new MqttMessage();
         message.setPayload("A single message from my computer fff"
@@ -78,17 +79,17 @@ public void messageArrived(String topic, MqttMessage message)
         throws Exception {
     
   
-    String mensaje=message.toString();
-    String[] lista = mensaje.split(",");
+    //String mensaje=message.toString();
+   // String[] lista = mensaje.split(",");
      
-    HttpClient client = HttpClients.createDefault();
-    HttpPost post = new HttpPost("http://172.24.42.60:8091/UnidadResidencial/"+Long.parseLong(lista[0])+"/Inmueble/"+Long.parseLong(lista[1]));
-    String json ="{\"id\": \" "+ Long.parseLong(lista[2])+ "\",\"idlock\": \"322\",\"tipoDeAlarma\": \""+ Long.parseLong(lista[3]) +"\"}";
-    StringEntity enitity = new StringEntity(json);
-    post.setEntity(enitity);
-    post.setHeader("Accept","application/json");
-     post.setHeader("Content-type","application/json");
-	 client.execute(post);
+    //HttpClient client = HttpClients.createDefault();
+    //HttpPost post = new HttpPost("http://172.24.42.60:8091/UnidadResidencial/"+Long.parseLong(lista[0])+"/Inmueble/"+Long.parseLong(lista[1]));
+    //String json ="{\"id\": \" "+ Long.parseLong(lista[2])+ "\",\"idlock\": \"322\",\"tipoDeAlarma\": \""+ Long.parseLong(lista[3]) +"\"}";
+    //StringEntity enitity = new StringEntity(json);
+   // post.setEntity(enitity);
+   // post.setHeader("Accept","application/json");
+    // post.setHeader("Content-type","application/json");
+//	 client.execute(post);
 
     
 //    
@@ -100,7 +101,7 @@ public void messageArrived(String topic, MqttMessage message)
 //    //logica.addAlerta(lista[0], , dto)
  //  JSONObject json = new JSONObject(mensaje);
    //System.out.print(json.get("remitente"));
-     System.out.println(mensaje +"34324324");
+   //  System.out.println(mensaje +"34324324");
  System.out.println(message);   
 }
 
